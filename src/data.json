@@ -1,0 +1,284 @@
+{
+  "menuFilters": {
+    "products": [
+      {
+        "product_id": "1",
+        "var": "Album Design",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "2",
+        "var": "Guest Book",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "3",
+        "var": "Pocket Album",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "4",
+        "var": "Image Retouch",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "5",
+        "var": "Photoshop Services",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "6",
+        "var": "Poster From Ready Album",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "7",
+        "var": "Magazine Album",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "product_id": "102",
+        "var": "Video Editing",
+        "selected": "0",
+        "searched": "0"
+      }
+    ],
+    "event": [
+      {
+        "listID": "1",
+        "listName": "Wedding",
+        "listVar": "Wedding",
+        "listDescVar": null
+      },
+      {
+        "listID": "2",
+        "listName": "Bar / Bat Mizca",
+        "listVar": "Bar - Bat Mitzva",
+        "listDescVar": null
+      },
+      {
+        "listID": "4",
+        "listName": "Hina",
+        "listVar": "Hinna",
+        "listDescVar": null
+      },
+      {
+        "listID": "5",
+        "listName": "Brit",
+        "listVar": "Brit",
+        "listDescVar": null
+      },
+      {
+        "listID": "6",
+        "listName": "Sundres",
+        "listVar": "Sundres",
+        "listDescVar": null
+      }
+    ],
+    "design_cat": [
+      {
+        "id": "1",
+        "name": "Classic",
+        "NameVar": "Classic",
+        "DesVar": "Classic"
+      },
+      {
+        "id": "2",
+        "name": "Combine",
+        "NameVar": "Combine",
+        "DesVar": "Combine"
+      },
+      {
+        "id": "3",
+        "name": "Atractive",
+        "NameVar": "Attractive",
+        "DesVar": "Attractive"
+      },
+      {
+        "id": "4",
+        "name": "Urban",
+        "NameVar": "Urban",
+        "DesVar": "Urban style design"
+      }
+    ],
+    "sizes_cat": [
+      {
+        "id": "1",
+        "name": "Panoramic",
+        "varName": "Panoramic"
+      },
+      {
+        "id": "2",
+        "name": "Vertical",
+        "varName": "Vertical"
+      },
+      {
+        "id": "3",
+        "name": "Square",
+        "varName": "Square"
+      }
+    ],
+    "customers": [
+      {
+        "CcusID": "1161",
+        "CcusName": "7 צלמים"
+      },
+      {
+        "CcusID": "1327",
+        "CcusName": "aaaaaaa"
+      },
+      {
+        "CcusID": "1305",
+        "CcusName": "Admin"
+      },
+      {
+        "CcusID": "1333",
+        "CcusName": "Chaplin"
+      }
+    ]
+  },
+  "quary": {
+    "attachCus": "",
+    "sizeCategoryID": "",
+    "designCatogeryID": "",
+    "eventID": "",
+    "productID": "",
+    "galleryFolders": "F:/perspective/galleries/examples_galleries/",
+    "q": "SELECT * FROM perspective.examples_v ;"
+  },
+  "examples": [
+    {
+      "id": "1",
+      "number": "0003",
+      "files": "30",
+      "sizeCategoryID": "1",
+      "sizeCategoryName": "Panoramic",
+      "designCatogeryID": "2",
+      "designCatogeryName": "Combine",
+      "eventID": "2",
+      "eventName": "Bar - Bat Mitzva",
+      "productID": "2",
+      "productName": "Guest Book",
+      "attachCus": "1161,1333,1",
+      "tags": "1,3,2",
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "18890-01.jpg"
+    },
+    {
+      "id": "2",
+      "number": "0004",
+      "files": "10",
+      "sizeCategoryID": "1",
+      "sizeCategoryName": "Panoramic",
+      "designCatogeryID": "3",
+      "designCatogeryName": "Attractive",
+      "eventID": "1",
+      "eventName": "Wedding",
+      "productID": "1",
+      "productName": "Album Design",
+      "attachCus": "1161,1333,1",
+      "tags": "1,3,2",
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "19463-01.jpg"
+    },
+    {
+      "id": "8",
+      "number": "37894",
+      "files": "25",
+      "sizeCategoryID": "1",
+      "sizeCategoryName": "Panoramic",
+      "designCatogeryID": "4",
+      "designCatogeryName": "Urban",
+      "eventID": "1",
+      "eventName": "Wedding",
+      "productID": "1",
+      "productName": "Album Design",
+      "attachCus": "1,1151",
+      "tags": "1,3,2",
+      "minPics": "150",
+      "maxPics": "180",
+      "CoverImgUrl": "18891-01.jpg"
+    },
+    {
+      "id": "3",
+      "number": "124658",
+      "files": "30",
+      "sizeCategoryID": "2",
+      "sizeCategoryName": "Vertical",
+      "designCatogeryID": "1",
+      "designCatogeryName": "Classic",
+      "eventID": "2",
+      "eventName": "Bar - Bat Mitzva",
+      "productID": "2",
+      "productName": "Guest Book",
+      "attachCus": "1333,1151,1",
+      "tags": "1,3,2",
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "18891-01.jpg"
+    },
+    {
+      "id": "7",
+      "number": "32607",
+      "files": "30",
+      "sizeCategoryID": "2",
+      "sizeCategoryName": "Vertical",
+      "designCatogeryID": "3",
+      "designCatogeryName": "Attractive",
+      "eventID": "1",
+      "eventName": "Wedding",
+      "productID": "7",
+      "productName": "Magazine Album",
+      "attachCus": "1333,1",
+      "tags": "1,3,2",
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "19463-01.jpg"
+    },
+    {
+      "id": "5",
+      "number": "0002",
+      "files": "25",
+      "sizeCategoryID": "3",
+      "sizeCategoryName": "Square",
+      "designCatogeryID": "2",
+      "designCatogeryName": "Combine",
+      "eventID": "4",
+      "eventName": "Hinna",
+      "productID": "1",
+      "productName": "Album Design",
+      "attachCus": "1333,1",
+      "tags": "1,3,2",
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "18782-01.jpg"
+    },
+    {
+      "id": "6",
+      "number": "0001",
+      "files": "25",
+      "sizeCategoryID": "3",
+      "sizeCategoryName": "Square",
+      "designCatogeryID": "1",
+      "designCatogeryName": "Classic",
+      "eventID": "1",
+      "eventName": "Wedding",
+      "productID": "1",
+      "productName": "Album Design",
+      "attachCus": "1338,1,1151",
+      "tags": "1,3,2",
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "17695-01.jpg"
+    }
+  ]
+}

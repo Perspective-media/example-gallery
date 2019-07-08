@@ -1,0 +1,334 @@
+// import $ from 'jquery';
+
+export const isEmpty = (obj) => {
+    for(let key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+};
+
+export const sortBy = (arr, field) => {
+    arr.sort( (next, prev) =>
+        next[field] > prev[field]
+            ? 1
+            : -1
+    );
+    return arr;
+};
+
+
+export const apiConnetcion = (apiKey) => {
+    function get(route) {
+        return fetch(`${route}?key=${apiKey}`);
+    }
+    function post(route, params) {
+        return fetch(route, {
+            method: 'POST',
+            body: JSON.stringify(params),
+            headers: {
+                'Authorization': `Bearer ${apiKey}`
+            }
+        });
+    }
+    return { get, post };
+};
+
+const isDescendant = (parent, child) => {
+    let node = child.parentNode;
+    while (node !== null) {
+        if (node === parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
+};
+
+export const closeDropDownOnClick = () => {
+    document.body.onclick = (e) => {
+        document.querySelector('.dropdown-menu.show') &&
+        !isDescendant(document.querySelector('.dropdown-menu.show').parentElement, e.target) &&
+        document.querySelector('.dropdown-menu.show') !== e.target &&
+        document.querySelector('.dropdown-menu.show').parentElement.firstElementChild.click();
+        };
+};
+
+export const isEqual = (value, other) => {
+
+    // Get the value type
+    let type = Object.prototype.toString.call(value);
+
+    // If the two objects are not the same type, return false
+    if (type !== Object.prototype.toString.call(other)) return false;
+
+    // If items are not an object or array, return false
+    if (['[object Array]', '[object Object]'].indexOf(type) < 0) return false;
+
+    // Compare the length of the length of the two items
+    let valueLen = type === '[object Array]' ? value.length : Object.keys(value).length;
+    let otherLen = type === '[object Array]' ? other.length : Object.keys(other).length;
+    if (valueLen !== otherLen) return false;
+
+    // Compare two items
+    let compare = function (item1, item2) {
+
+        // Get the object type
+        let itemType = Object.prototype.toString.call(item1);
+
+        // If an object or array, compare recursively
+        if (['[object Array]', '[object Object]'].indexOf(itemType) >= 0) {
+            if (!isEqual(item1, item2)) return false;
+        }
+
+        // Otherwise, do a simple comparison
+        else {
+
+            // If the two items are not the same type, return false
+            if (itemType !== Object.prototype.toString.call(item2)) return false;
+
+            // Else if it's a function, convert to a string and compare
+            // Otherwise, just compare
+            if (itemType === '[object Function]') {
+                if (item1.toString() !== item2.toString()) return false;
+            } else {
+                if (item1 !== item2) return false;
+            }
+
+        }
+    };
+
+    // Compare properties
+    if (type === '[object Array]') {
+        for (let i = 0; i < valueLen; i++) {
+            if (compare(value[i], other[i]) === false) return false;
+        }
+    } else {
+        for (let key in value) {
+            if (value.hasOwnProperty(key)) {
+                if (compare(value[key], other[key]) === false) return false;
+            }
+        }
+    }
+
+    // If nothing failed, return true
+    return true;
+
+};
+
+export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, callback) => {
+    let filteredObjectList = [];
+    //checking if some filter is exist
+    let listOfFilters = Object.keys(filterList);
+    let isSomeFilterChecked = listOfFilters.some( item => {
+        return filterList[item].some( filter => parseInt(filter.selected) );
+    });
+    filteredObjectList = prevExamples.map( obj => {
+        // obj = example object
+        //creating empty array for holding multifilters boolean values from different types of filtering
+        let multifilters = [];
+        return {
+            ...obj,
+            filtered: !isSomeFilterChecked || (() => {listOfFilters.some( item => {
+                    //item = filter group name(products/event...)
+                    // val - value of item property in example object
+                    let val = typeof obj[item] === 'string' ? obj[item].toLowerCase() : obj[item];
+                    // filters - array with only selected filters
+                    let filters = item === excludeFilterGroup
+                        ? [...filterList[item]]
+                        : filterList[item].filter( filter => !!parseInt(filter.selected) );
+                    // if selected filters in current type exist - checking if at least some of them is equal to our variable 'val' from object
+                    //and pushing this returning boolean true or false to multifilters array
+                    filters.length > 0 && multifilters.push(
+                        filters.some( filter => typeof val === 'string'
+                            ? filter.id == val
+                            : val.some( elemId => filter.id == elemId )
+                        ));
+                });
+                    //returning boolean value true or false if all pushed condition in our multifilter is true
+                    return multifilters.every( val => val )}
+            )() ? 1 : 0
+        };
+    });
+    callback && callback({type: 'showExisting', examples: filteredObjectList});
+    return filteredObjectList;
+};
+
+export const listOfAvailableFunc = (example, filter, listOfAvailable) => {
+    !!parseInt(example.filtered) && (
+        typeof example[filter] === 'string'
+            ? !listOfAvailable[filter].includes(example[filter]) &&
+            listOfAvailable[filter].push(example[filter])
+            : example[filter].map(elemId => {
+                !listOfAvailable[filter].includes(elemId) &&
+                listOfAvailable[filter].push(elemId)
+            })
+    )
+};
+
+export const createAndLoadScript = (src) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.type = 'text/javascript';
+    script.async = false;
+    document.body.appendChild(script);
+};
+
+export const handleToggleMenu = () => {
+    const toOverlayMenu = (screen) => {
+        var menu = $('body').data('menu');
+        if(screen < 992){
+            if($('body').hasClass(menu)){
+                $('body').removeClass(menu).addClass('vertical-overlay-menu');
+            }
+        }
+        else{
+            if($('body').hasClass('vertical-overlay-menu')){
+                $('body').removeClass('vertical-overlay-menu').addClass(menu);
+            }
+        }
+    };
+
+    const toCollapseMenu = (screen)  => {
+        if(screen > 991) {
+            if (document.body.classList.contains('menu-expanded')) {
+                document.body.classList.remove('menu-expanded');
+                document.body.classList.add('menu-collapsed');
+            } else {
+                document.body.classList.remove('menu-collapsed');
+                document.body.classList.add('menu-expanded')
+            }
+        } else {
+            if (document.body.classList.contains('menu-hide')) {
+                document.body.classList.remove('menu-hide');
+                document.body.classList.add('menu-open');
+            } else {
+                document.body.classList.remove('menu-open');
+                document.body.classList.add('menu-hide')
+            }
+        }
+
+    };
+
+    toOverlayMenu(window.innerWidth);
+    document.addEventListener('resize', toOverlayMenu(window.innerWidth));
+    document.querySelectorAll('.menu-toggle-handle').forEach( item => item.addEventListener('click', () => {
+        toCollapseMenu(window.innerWidth);
+    }));
+};
+
+
+export const bookView = (e, path, list, exampleNumber) => {
+    /*// -------------WOW BOOK FUNC-------------
+    let bookDiv = document.createElement('div');
+    bookDiv.id = 'book';
+    bookDiv.innerHTML = '';
+    document.querySelector('.wowBookContainer').innerHTML = '';
+    let sizes = {};
+    if(window.innerHeight > window.innerWidth){
+        sizes.bookContainerHeight = 'auto';
+        sizes.bookContainerWidth = 'auto';
+        sizes.bookHeight = '30vh';
+    } else {
+        sizes.bookHeight = '75vh';
+        sizes.bookContainerHeight = 'auto';
+        sizes.bookContainerWidth = 'auto';
+    }
+    let bookOptions = {
+        height   : sizes.bookHeight
+        ,width    : ''
+        // ,maxWidth : 800
+        ,flipSound: false
+        ,closable : false
+        ,hardPages : true
+        ,toolbar : "lastLeft, left, right, lastRight, slideshow, thumbnails"
+        ,thumbnails: false
+        ,hardPage: true
+        ,showPage: false
+
+
+        ,container: true
+        ,containerPadding: "20px"
+        // ,scaleToFit:'.wowBookContainer'
+
+        // ,toolbarContainerPosition: "top" // default "bottom"
+
+        // Uncomment the option toc to create a Table of Contents
+        // ,toc: [                    // table of contents in the format
+        // 	[ "Introduction", 2 ],  // [ "title", page number ]
+        // 	[ "First chapter", 5 ],
+        // 	[ "Go to codecanyon.net", "http://codecanyon.net" ] // or [ "title", "url" ]
+        // ]
+    };
+    list.map( imgNum => {
+        let image = new Image();
+        image.src = `${path}/${exampleNumber}/${imgNum}`;
+        let heightNum = parseInt(sizes.bookHeight);
+        bookOptions.width = heightNum*2+'vh';
+        image.setAttribute('data-double', 'true');
+        bookDiv.appendChild(image);
+    });
+
+    window.scrollTo(0,0);
+    document.querySelector('.wowBookContainer').style.height = sizes.bookContainerHeight;
+    document.querySelector('.wowBookContainer').style.width = sizes.bookContainerWidth;
+    document.querySelector('.wowBookContainer').appendChild(bookDiv);
+    /!*$.fancybox.open(
+        document.querySelector('.wowBookContainer'),
+        {
+            beforeClose: function () {
+                onCloseBook();
+            },
+            beforeShow: function(){
+                $("body").css({'overflow-y':'hidden'});
+            },
+            afterClose: function(){
+                $("body").css({'overflow-y':'visible'});
+            }
+        }
+    );*!/
+    $('#book').wowBook( bookOptions );
+    // How to use wowbook API
+    // var book=$.wowBook("#book"); // get book object instance
+    // book.gotoPage( 4 ); // call some method*/
+
+    function loadApp() {
+        var flipbook = $('.flipbook');
+
+        // Check if the CSS was already loaded
+
+        if (flipbook.width()==0 || flipbook.height()==0) {
+            setTimeout(loadApp, 10);
+            return;
+        }
+
+        $('.flipbook .double').scissor();
+
+        // Create the flipbook
+
+        $('.flipbook').turn({
+            // Elevation
+
+            elevation: 50,
+
+            // Enable gradients
+
+            gradients: true,
+
+            // Auto center this flipbook
+
+            autoCenter: true
+
+        });
+    }
+
+    // Load the HTML4 version if there's not CSS transform
+
+    yepnope({
+        test : Modernizr.csstransforms,
+        yep: ['assets/js/lib/turn.min.js'],
+        nope: ['assets/js/lib/turn.html4.min.js'],
+        both: ['assets/js/lib/scissor.min.js', 'assets/css/double-page.css'],
+        complete: loadApp
+    });
+};

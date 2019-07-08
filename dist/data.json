@@ -1,0 +1,376 @@
+{
+  "menuFilters": {
+    "products": [
+      {
+        "id": "1",
+        "name": "Album Design",
+        "caption": "Album Design",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "2",
+        "name": "Guest Book",
+        "caption": "Guest Book",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "3",
+        "name": "Pocket Album",
+        "caption": "Pocket Album",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "4",
+        "name": "Image Retouch",
+        "caption": "Image Retouch",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "5",
+        "name": "Photoshop Services",
+        "caption": "Photoshop Services",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "6",
+        "name": "Poster From Ready Album",
+        "caption": "Poster From Ready Album",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "7",
+        "name": "Magazine Album",
+        "caption": "Magazine Album",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "102",
+        "name": "Video Editing",
+        "caption": "Video Editing",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      }
+    ],
+    "event": [
+      {
+        "id": "1",
+        "name": "Wedding",
+        "caption": "Wedding",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "2",
+        "name": "Bar / Bat Mizca",
+        "caption": "Bar - Bat Mitzva",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "4",
+        "name": "Hina",
+        "caption": "Hinna",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "5",
+        "name": "Brit",
+        "caption": "Brit",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "6",
+        "name": "Sundres",
+        "caption": "Sundres",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      }
+    ],
+    "design_cat": [
+      {
+        "id": "1",
+        "name": "Classic",
+        "caption": "Classic",
+        "des": "Classic",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "2",
+        "name": "Combine",
+        "caption": "Combine",
+        "des": "Combine",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "3",
+        "name": "Atractive",
+        "caption": "Attractive",
+        "des": "Attractive",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "4",
+        "name": "Urban",
+        "caption": "Urban",
+        "des": "Urban style design",
+        "selected": "0",
+        "searched": "0"
+      }
+    ],
+    "sizes_cat": [
+      {
+        "id": "1",
+        "name": "Panoramic",
+        "caption": "Panoramic",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "2",
+        "name": "Vertical",
+        "caption": "Vertical",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "3",
+        "name": "Square",
+        "caption": "Square",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      }
+    ],
+    "customers": [
+      {
+        "id": "1161",
+        "name": "",
+        "caption": "7 צלמים",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "1327",
+        "name": "",
+        "caption": "aaaaaaa",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "1305",
+        "name": "",
+        "caption": "Admin",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "1333",
+        "name": "",
+        "caption": "Chaplin",
+        "des": "",
+        "selected": "0",
+        "searched": "0"
+      }
+    ],
+    "tags": [
+      {
+        "id": "1",
+        "name": "avi",
+        "caption": "987",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "2",
+        "name": "dani",
+        "caption": "962",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      },
+      {
+        "id": "3",
+        "name": "moshe",
+        "caption": "534",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      }
+    ]
+  },
+  "quary": {
+    "attachCus": "",
+    "sizeCategoryID": "",
+    "designCatogeryID": "",
+    "eventID": "",
+    "productID": "",
+    "galleryFolders": "F:/perspective/galleries/examples_galleries/",
+    "q": "SELECT `examples`.`id` AS `id`, `examples`.`number` AS `number`, `examples`.`files` AS `files`, `examples`.`sizeCategory` AS `sizes_cat`, `sizecategorytrns`.`var` AS `sizes_cat_caption`, `examples`.`designCatogery` AS `design_cat`, `designcatogerytrns`.`var` AS `design_cat_caption`, `examples`.`event` AS `event`, `list_eventstrns`.`var` AS `event_caption`, `examples`.`product` AS `products`, `list_product`.`var` AS `products_caption`, `examples`.`customers` AS `customers`, `examples`.`tags` AS `tags`, `examples`.`minPics` AS `minPics`, `examples`.`maxPics` AS `maxPics` FROM (((((((`examples` LEFT JOIN `list_sizes_category` ON ((`examples`.`sizeCategory` = `list_sizes_category`.`id`))) LEFT JOIN `language` `sizecategorytrns` ON ((`sizecategorytrns`.`id` = `list_sizes_category`.`varName`))) LEFT JOIN `examples_design_category` ON ((`examples`.`designCatogery` = `examples_design_category`.`id`))) LEFT JOIN `language` `designcatogerytrns` ON ((`designcatogerytrns`.`id` = `examples_design_category`.`NameVar`))) LEFT JOIN `list_events` ON ((`examples`.`event` = `list_events`.`listID`))) LEFT JOIN `language` `list_eventstrns` ON ((`list_eventstrns`.`id` = `list_events`.`listVar`))) LEFT JOIN `list_product` ON ((`examples`.`product` = `list_product`.`product_id`))) ;"
+  },
+  "examples": [
+    {
+      "id": "1",
+      "number": "0003",
+      "files": "30",
+      "sizes_cat": "1",
+      "sizes_cat_caption": "Panoramic",
+      "design_cat": "2",
+      "design_cat_caption": "Combine",
+      "event": "2",
+      "event_caption": "Bar - Bat Mitzva",
+      "products": "2",
+      "products_caption": "Guest Book",
+      "customers": ["1161","1333","1"],
+      "tags": ["1","3","2"],
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "18890-01.jpg",
+      "filtered": "0"
+    },
+    {
+      "id": "2",
+      "number": "0004",
+      "files": "10",
+      "sizes_cat": "1",
+      "sizes_cat_caption": "Panoramic",
+      "design_cat": "3",
+      "design_cat_caption": "Attractive",
+      "event": "1",
+      "event_caption": "Wedding",
+      "products": "1",
+      "products_caption": "Album Design",
+      "customers": ["1161","1333","1"],
+      "tags": ["1","3","2"],
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "19463-01.jpg",
+      "filtered": "0"
+    },
+    {
+      "id": "8",
+      "number": "37894",
+      "files": "25",
+      "sizes_cat": "1",
+      "sizes_cat_caption": "Panoramic",
+      "design_cat": "4",
+      "design_cat_caption": "Urban",
+      "event": "1",
+      "event_caption": "Wedding",
+      "products": "1",
+      "products_caption": "Album Design",
+      "customers": ["1","1151"],
+      "tags": ["1","3","2"],
+      "minPics": "150",
+      "maxPics": "180",
+      "CoverImgUrl": "18891-01.jpg",
+      "filtered": "0"
+    },
+    {
+      "id": "3",
+      "number": "124658",
+      "files": "30",
+      "sizes_cat": "2",
+      "sizes_cat_caption": "Vertical",
+      "design_cat": "1",
+      "design_cat_caption": "Classic",
+      "event": "2",
+      "event_caption": "Bar - Bat Mitzva",
+      "products": "2",
+      "products_caption": "Guest Book",
+      "customers": ["1333","1151","1"],
+      "tags": ["1","3","2"],
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "18891-01.jpg",
+      "filtered": "0"
+    },
+    {
+      "id": "7",
+      "number": "32607",
+      "files": "30",
+      "sizes_cat": "2",
+      "sizes_cat_caption": "Vertical",
+      "design_cat": "3",
+      "design_cat_caption": "Attractive",
+      "event": "1",
+      "event_caption": "Wedding",
+      "products": "7",
+      "products_caption": "Magazine Album",
+      "customers": ["1333","1"],
+      "tags": ["1","3","2"],
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "19463-01.jpg",
+      "filtered": "0"
+    },
+    {
+      "id": "5",
+      "number": "0002",
+      "files": "25",
+      "sizes_cat": "3",
+      "sizes_cat_caption": "Square",
+      "design_cat": "2",
+      "design_cat_caption": "Combine",
+      "event": "4",
+      "event_caption": "Hinna",
+      "products": "1",
+      "products_caption": "Album Design",
+      "customers": ["1333","1"],
+      "tags": ["1","3","2"],
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "18782-01.jpg",
+      "filtered": "0"
+    },
+    {
+      "id": "6",
+      "number": "0001",
+      "files": "25",
+      "sizes_cat": "3",
+      "sizes_cat_caption": "Square",
+      "design_cat": "1",
+      "design_cat_caption": "Classic",
+      "event": "1",
+      "event_caption": "Wedding",
+      "products": "1",
+      "products_caption": "Album Design",
+      "customers": ["1338","1","1151"],
+      "tags": ["1","3","2"],
+      "minPics": "100",
+      "maxPics": "150",
+      "CoverImgUrl": "17695-01.jpg",
+      "filtered": "0"
+    }
+  ]
+}

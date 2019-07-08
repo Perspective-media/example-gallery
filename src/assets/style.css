@@ -1,0 +1,128 @@
+body.vertical-layout.vertical-menu.menu-collapsed .content, body.vertical-layout.vertical-menu.menu-collapsed .footer,
+body.vertical-layout.vertical-menu.menu-collapsed .navbar .navbar-container {
+    margin-left: 0 !important;
+}
+
+body.vertical-layout.vertical-menu.menu-collapsed .navbar-header,
+body.vertical-layout.vertical-menu.menu-collapsed .main-menu {
+    width: 0 !important;
+}
+
+.navigation-main{
+    height: 100%;
+}
+
+.custom-control {
+    padding-right: 1.5rem;
+
+}
+.custom-control-label{
+    left: 10px;
+}
+
+.custom-control-label::before,
+.custom-control-label::after {
+    top: 0.625rem !important;
+}
+
+ul li .btn-group {
+    padding: 5px 20px;
+}
+.collapse, .collapsing{
+    padding: 0.5rem 1.5rem;
+}
+
+.collapse .row, .collapsing .row {
+    padding: 0;
+}
+
+.collapse .form-group {
+    margin: 0;
+}
+
+.dropdown-menu .list-holder {
+    max-height:250px;
+}
+
+.card-accordion .card-header2 {
+    padding: 0.5rem 1.5rem;
+}
+
+.card-accordion .card {
+    margin-bottom: 0px;
+}
+
+.header-navbar .navbar-container ul.nav li a.menu-toggle-handle {
+    padding: 1.7rem 1rem 1.6rem 1rem;
+}
+
+a.menu-toggle-handle i {
+    font-size: 1.6rem;
+}
+
+body.vertical-layout.vertical-menu.menu-collapsed .main-menu {
+    width: 60px;
+    -webkit-transition: 300ms ease all;
+    -moz-transition: 300ms ease all;
+    -o-transition: 300ms ease all;
+    transition: 300ms ease all;
+    -webkit-transform: translateZ(-160px) translateX(-160px);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translateZ(-160px) translateX(-160px);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translateZ(-160px) translateX(-160px);
+    transform: translate3d(0, 0, 0);
+}
+
+body.vertical-layout.vertical-menu.menu-collapsed .navbar-header, body.vertical-layout.vertical-menu.menu-collapsed .main-menu {
+    width: 0 !important;
+}
+
+body.vertical-layout.vertical-menu.menu-collapsed .navbar-header {
+    z-index: 999;
+    float: left;
+    width: 60px;
+}
+
+.image-cover-box {
+    height: 13vw;
+    width: 100%;
+}
+
+.image-cover-box img{
+    width:100%;
+    height:auto;
+    /*object-fit:cover;*/
+    transition: 300ms;
+}
+
+.image-cover-box img:hover{
+    box-shadow: 0 5px 5px rgba(0,0,0,0.3); /* Параметры тени */
+    transform: scale(1.01);
+}
+
+body.vertical-layout.vertical-menu.menu-collapsed .main-menu-content .nav-item .card-accordion .card {
+    display: none;
+}
+
+.modal-content .modal-body .card-content img {
+    transition: 300ms;
+}
+
+.modal-content .modal-body .card-content img:hover {
+    opacity: 0.9;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.3); /* Параметры тени */
+    transform: scale(1.01);
+}
+
+@media screen and (max-width: 1200px){
+    .image-cover-box {
+        height: 23vw;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .image-cover-box {
+        height: 45vw;
+    }
+}

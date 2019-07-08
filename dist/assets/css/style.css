@@ -1,0 +1,12 @@
+h2 {
+    color: #5fdb25;
+    text-align: center;
+}
+
+.header-navbar .navbar-container ul.nav li a.menu-toggle-handle {
+    padding: 1.7rem 1rem 1.6rem 1rem;
+}
+
+a.menu-toggle-handle i {
+    font-size: 1.6rem;
+}
