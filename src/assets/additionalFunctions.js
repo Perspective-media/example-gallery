@@ -217,118 +217,92 @@ export const handleToggleMenu = () => {
     }));
 };
 
+const Page = function() {
+
+    var config = {
+            $bookBlock : $( '#bb-bookblock' ),
+            $navNext : $( '#bb-nav-next' ),
+            $navPrev : $( '#bb-nav-prev' ),
+            $navFirst : $( '#bb-nav-first' ),
+            $navLast : $( '#bb-nav-last' )
+        },
+        init = function() {
+            config.$bookBlock.bookblock( {
+                speed : 800,
+                shadowSides : 0.8,
+                shadowFlip : 0.7
+            } );
+            initEvents();
+        },
+        initEvents = function() {
+
+            var $slides = config.$bookBlock.children();
+
+            // add navigation events
+            config.$navNext.on( 'click touchstart', function() {
+                config.$bookBlock.bookblock( 'next' );
+                return false;
+            } );
+
+            config.$navPrev.on( 'click touchstart', function() {
+                config.$bookBlock.bookblock( 'prev' );
+                return false;
+            } );
+
+            config.$navFirst.on( 'click touchstart', function() {
+                config.$bookBlock.bookblock( 'first' );
+                return false;
+            } );
+
+            config.$navLast.on( 'click touchstart', function() {
+                config.$bookBlock.bookblock( 'last' );
+                return false;
+            } );
+
+            // add swipe events
+            $slides.on( {
+                'swipeleft' : function( event ) {
+                    config.$bookBlock.bookblock( 'next' );
+                    return false;
+                },
+                'swiperight' : function( event ) {
+                    config.$bookBlock.bookblock( 'prev' );
+                    return false;
+                }
+            } );
+
+            // add keyboard events
+            $( document ).keydown( function(e) {
+                var keyCode = e.keyCode || e.which,
+                    arrow = {
+                        left : 37,
+                        up : 38,
+                        right : 39,
+                        down : 40
+                    };
+
+                switch (keyCode) {
+                    case arrow.left:
+                        config.$bookBlock.bookblock( 'prev' );
+                        break;
+                    case arrow.right:
+                        config.$bookBlock.bookblock( 'next' );
+                        break;
+                }
+            } );
+        };
+
+    return { init : init };
+
+};
+
 
 export const bookView = (e, path, list, exampleNumber) => {
-    /*// -------------WOW BOOK FUNC-------------
-    let bookDiv = document.createElement('div');
-    bookDiv.id = 'book';
-    bookDiv.innerHTML = '';
-    document.querySelector('.wowBookContainer').innerHTML = '';
-    let sizes = {};
-    if(window.innerHeight > window.innerWidth){
-        sizes.bookContainerHeight = 'auto';
-        sizes.bookContainerWidth = 'auto';
-        sizes.bookHeight = '30vh';
-    } else {
-        sizes.bookHeight = '75vh';
-        sizes.bookContainerHeight = 'auto';
-        sizes.bookContainerWidth = 'auto';
-    }
-    let bookOptions = {
-        height   : sizes.bookHeight
-        ,width    : ''
-        // ,maxWidth : 800
-        ,flipSound: false
-        ,closable : false
-        ,hardPages : true
-        ,toolbar : "lastLeft, left, right, lastRight, slideshow, thumbnails"
-        ,thumbnails: false
-        ,hardPage: true
-        ,showPage: false
 
-
-        ,container: true
-        ,containerPadding: "20px"
-        // ,scaleToFit:'.wowBookContainer'
-
-        // ,toolbarContainerPosition: "top" // default "bottom"
-
-        // Uncomment the option toc to create a Table of Contents
-        // ,toc: [                    // table of contents in the format
-        // 	[ "Introduction", 2 ],  // [ "title", page number ]
-        // 	[ "First chapter", 5 ],
-        // 	[ "Go to codecanyon.net", "http://codecanyon.net" ] // or [ "title", "url" ]
-        // ]
-    };
-    list.map( imgNum => {
-        let image = new Image();
-        image.src = `${path}/${exampleNumber}/${imgNum}`;
-        let heightNum = parseInt(sizes.bookHeight);
-        bookOptions.width = heightNum*2+'vh';
-        image.setAttribute('data-double', 'true');
-        bookDiv.appendChild(image);
-    });
-
-    window.scrollTo(0,0);
-    document.querySelector('.wowBookContainer').style.height = sizes.bookContainerHeight;
-    document.querySelector('.wowBookContainer').style.width = sizes.bookContainerWidth;
-    document.querySelector('.wowBookContainer').appendChild(bookDiv);
-    /!*$.fancybox.open(
-        document.querySelector('.wowBookContainer'),
-        {
-            beforeClose: function () {
-                onCloseBook();
-            },
-            beforeShow: function(){
-                $("body").css({'overflow-y':'hidden'});
-            },
-            afterClose: function(){
-                $("body").css({'overflow-y':'visible'});
-            }
-        }
-    );*!/
-    $('#book').wowBook( bookOptions );
-    // How to use wowbook API
-    // var book=$.wowBook("#book"); // get book object instance
-    // book.gotoPage( 4 ); // call some method*/
-
-    function loadApp() {
-        var flipbook = $('.flipbook');
-
-        // Check if the CSS was already loaded
-
-        if (flipbook.width()==0 || flipbook.height()==0) {
-            setTimeout(loadApp, 10);
-            return;
-        }
-
-        $('.flipbook .double').scissor();
-
-        // Create the flipbook
-
-        $('.flipbook').turn({
-            // Elevation
-
-            elevation: 50,
-
-            // Enable gradients
-
-            gradients: true,
-
-            // Auto center this flipbook
-
-            autoCenter: true
-
-        });
-    }
-
-    // Load the HTML4 version if there's not CSS transform
-
-    yepnope({
-        test : Modernizr.csstransforms,
-        yep: ['assets/js/lib/turn.min.js'],
-        nope: ['assets/js/lib/turn.html4.min.js'],
-        both: ['assets/js/lib/scissor.min.js', 'assets/css/double-page.css'],
-        complete: loadApp
-    });
+    let book = new Page();
+    book.init();
+    let myHeight = document.body.querySelector(".bb-item img").getBoundingClientRect().height;
+    let bookContainer = document.getElementById('bb-bookblock');
+    bookContainer.style.height = myHeight + 'px';
+    $('#bb-bookblock').bookblock('jump', 5 );
 };

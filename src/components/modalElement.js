@@ -25,17 +25,31 @@ const MyVerticallyCenteredModal = (props) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="flipbook-viewport">
-                        <div className="container">
-                            <div className="flipbook">
-                                <div className="page" style={testStyle}></div>
-                                <div className="double" style={testStyle}></div>
-                                <div className="double" style={testStyle}></div>
-                                <div className="double" style={testStyle}></div>
-                                <div className="double" style={testStyle}></div>
-                                <div className="double" style={testStyle}></div>
-                                <div className="double" style={testStyle}></div>
+                    <div className="main clearfix">
+                        <div className="bb-custom-wrapper">
+                            <div id="bb-bookblock" className="bb-bookblock">
+                                <div className="bb-item">
+                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image01"/>
+                                </div>
+                                <div className="bb-item">
+                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image02"/>
+                                </div>
+                                <div className="bb-item">
+                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image03"/>
+                                </div>
+                                <div className="bb-item">
+                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image04"/>
+                                </div>
+                                <div className="bb-item">
+                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image05"/>
+                                </div>
                             </div>
+                            <nav>
+                                <a id="bb-nav-first" href="#" className="">First page</a>
+                                <a id="bb-nav-prev" href="#" className="">Previous</a>
+                                <a id="bb-nav-next" href="#" className="">Next</a>
+                                <a id="bb-nav-last" href="#" className="">Last page</a>
+                            </nav>
                         </div>
                     </div>
                     <div className="row">

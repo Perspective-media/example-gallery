@@ -115,6 +115,25 @@ body.vertical-layout.vertical-menu.menu-collapsed .main-menu-content .nav-item .
     transform: scale(1.01);
 }
 
+.flipbook-viewport .container {
+    z-index: 9;
+}
+
+.main.clearfix {
+    max-width: 80%;
+}
+
+.bb-custom-wrapper,
+.bb-bookblock {
+    width: 100%;
+}
+
+.bb-flip-initial img,
+.bb-page img,
+.bb-item img {
+    width: 100%;
+}
+
 @media screen and (max-width: 1200px){
     .image-cover-box {
         height: 23vw;

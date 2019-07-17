@@ -179,7 +179,7 @@ const App = () => {
                         <li className="nav-item mr-auto">
                             <a className="navbar-brand" href="index.html">
                                 <img className="brand-logo" alt="Chameleon admin logo" src="app_assets/ltr/app-assets/images/logo/logo.png"/>
-                            <h3 className="brand-text">Filters</h3>
+                                <h3 className="brand-text">Filters</h3>
                             </a>
                         </li>
                         <li className="nav-item d-md-none">
