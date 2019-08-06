@@ -1,4 +1,4 @@
-import React, {Component, render, useState} from 'react';
+import React, {useRef} from 'react';
 import {Modal, Button, ButtonToolbar} from 'react-bootstrap';
 import {bookView} from '../assets/additionalFunctions';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -6,11 +6,11 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 
 const MyVerticallyCenteredModal = (props) => {
+        let bookContainer = useRef();
+        let gridContainer = useRef();
+
         const {list, num} = props.data;
 
-        let testStyle = {
-            backgroundImage: 'url(http://ive.com.ua/static/wallpapers/7408824a.JPG)'
-        };
         return (
             <Modal
                 {...props}
@@ -25,39 +25,57 @@ const MyVerticallyCenteredModal = (props) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="main clearfix">
+                    <div className="main clearfix hidden" ref={bookContainer}>
+                        <div className="book-header">
+                            <div></div>
+                            <button
+                               className="round border-0 cursor-pointer bg"
+                               onClick={ (e) => {
+                                   bookContainer.current.classList.add('hidden');
+                                   gridContainer.current.classList.remove('hidden');
+                               }}
+                            >
+                                Close book-view
+                            </button>
+                        </div>
                         <div className="bb-custom-wrapper">
                             <div id="bb-bookblock" className="bb-bookblock">
-                                <div className="bb-item">
-                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image01"/>
-                                </div>
-                                <div className="bb-item">
-                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image02"/>
-                                </div>
-                                <div className="bb-item">
-                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image03"/>
-                                </div>
-                                <div className="bb-item">
-                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image04"/>
-                                </div>
-                                <div className="bb-item">
-                                    <img src="https://galleries.perspective-media.me/examples_galleries/0001/17695-01.jpg" alt="image05"/>
-                                </div>
+                                {
+                                    list && list.map(image => {
+                                        return (
+                                            <div className="bb-item" key={image}>
+                                                <img src={`https://galleries.perspective-media.me/examples_galleries/${num}/${image}`} />
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                             <nav>
-                                <a id="bb-nav-first" href="#" className="">First page</a>
-                                <a id="bb-nav-prev" href="#" className="">Previous</a>
-                                <a id="bb-nav-next" href="#" className="">Next</a>
-                                <a id="bb-nav-last" href="#" className="">Last page</a>
+                                <a id="bb-nav-first" href="#" className="btn btn-bg-gradient-x-purple-blue"><i className="ft-chevrons-left"/></a>
+                                <a id="bb-nav-prev" href="#" className="btn btn-bg-gradient-x-purple-blue"><i className="ft-chevron-left"/></a>
+                                <a id="bb-nav-next" href="#" className="btn btn-bg-gradient-x-purple-blue"><i className="ft-chevron-right"/></a>
+                                <a id="bb-nav-last" href="#" className="btn btn-bg-gradient-x-purple-blue"><i className="ft-chevrons-right"/></a>
                             </nav>
                         </div>
+                        <div className="book-footer">
+                            {list && list.map((image, ind) => {
+                                return (
+                                    <img
+                                        src={`https://galleries.perspective-media.me/examples_galleries/${num}/${image}`}
+                                        alt="Card image cap"
+                                        onClick={ (e) => bookView(ind, bookContainer, gridContainer)}
+                                        key={image}
+                                    />
+                                )
+                            })}
+                        </div>
                     </div>
-                    <div className="row">
-                        {list && list.map(image => {
+                    <div className="row" ref={gridContainer}>
+                        {list && list.map((image, ind) => {
                             return (
                                 <div
                                     className="col-xs-12 col-sm-12 col-md-4 col-lg-3"
-                                    onClick={ (e) => bookView(e, 'https://galleries.perspective-media.me/examples_galleries/', list, num)}
+                                    onClick={ (e) => bookView(ind, bookContainer, gridContainer)}
                                     key={image}>
                                     <div className="card border-0 box-shadow-0">
                                         <div className="card-content">
@@ -74,9 +92,6 @@ const MyVerticallyCenteredModal = (props) => {
                         })}
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={props.onHide}>Close</Button>
-                </Modal.Footer>
             </Modal>
         );
 };

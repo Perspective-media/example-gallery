@@ -12,6 +12,7 @@ const App = () => {
     const [fetchedExamples, setFetchedExamples] = useState([]);
 
     const recurerFilters = (prevFilters, action) => {
+        console.log(action.type);
         switch (action.type){
             case 'fetched':
                 return action.state;
@@ -19,16 +20,19 @@ const App = () => {
             case 'toggleFilter':
                 let itemIndex = prevFilters[action.groupName].findIndex( item => item.id === action.item.id);
                 let selectedNew = !!parseInt(action.item.selected) ? 0 : 1;
-                let newState = {...prevFilters};
+                //way of copying nested object, i`m not sure if this is the best way
+                let newStateString = JSON.stringify(prevFilters);
+                let newState = JSON.parse(newStateString);
+                // end of copying
                 newState[action.groupName][itemIndex].selected = selectedNew;
                 setLastFilterGroup( prevstate => {
-                    let newState = [...prevstate];
-                    let curIndex = newState.indexOf( action.groupName);
-                    let isSomeChecked = prevFilters[action.groupName].some( filter => !!parseInt(filter.selected));
+                    let newStateGroup = [...prevstate];
+                    let curIndex = newStateGroup.indexOf( action.groupName);
+                    let isSomeChecked = newState[action.groupName].some( filter => !!parseInt(filter.selected));
                     curIndex < 0
-                        ? newState.push(action.groupName)
-                        : newState.splice(curIndex, 1) && isSomeChecked && newState.push(action.groupName);
-                    return newState;
+                        ? newStateGroup.push(action.groupName)
+                        : newStateGroup.splice(curIndex, 1) && isSomeChecked && newStateGroup.push(action.groupName);
+                    return newStateGroup;
                 });
                 return newState;
 
@@ -63,21 +67,24 @@ const App = () => {
                             listOfAvailableFunc(example, filter, listOfAvailable);
                         })
                 });
-                let newFilters = {...prevFilters};
+                //deep copy obj
+                let newFiltersString = JSON.stringify(prevFilters);
+                let newFilters = JSON.parse(newFiltersString);
+                //end deep copy
                 let isSomeChecked = lastFilterGroup.length > 0 && newFilters[lastELemFilter].some( filter => !!parseInt(filter.selected) );
                 lisOfFilters.map( filterGroup => {
                     newFilters[filterGroup] = prevFilters[filterGroup].map( filter => {
-                            return listOfAvailable[filterGroup].includes(filter.id)
-                                ? {
-                                    ...filter,
-                                    available: 1
-                                }
-                                : {
-                                    ...filter,
-                                    selected: 0,
-                                    available: 0
-                                };
-                        })
+                        return listOfAvailable[filterGroup].includes(filter.id)
+                            ? {
+                                ...filter,
+                                available: 1
+                            }
+                            : {
+                                ...filter,
+                                selected: 0,
+                                available: 0
+                            };
+                    })
                 });
                 return isEqual(prevFilters, newFilters) ? prevFilters : newFilters;
 
@@ -85,7 +92,7 @@ const App = () => {
                 return {
                     ...prevFilters,
                     [action.groupName]: [...prevFilters[action.groupName]].map( filter => {
-                        return filter.available ? {
+                        return filter.available && filter.searched ? {
                             ...filter,
                             selected: action.value
                         } : filter
@@ -143,6 +150,7 @@ const App = () => {
             handleToggleMenu();
             createAndLoadScript('app_assets/ltr/app-assets/js/core/app-menu.js');
             createAndLoadScript('app_assets/ltr/app-assets/js/core/app.js');
+            createAndLoadScript('app_assets/ltr/app-assets/js/scripts/popover/popover.min.js');
         });
     },[]);
 

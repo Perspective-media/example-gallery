@@ -297,12 +297,16 @@ const Page = function() {
 };
 
 
-export const bookView = (e, path, list, exampleNumber) => {
-
-    let book = new Page();
-    book.init();
-    let myHeight = document.body.querySelector(".bb-item img").getBoundingClientRect().height;
-    let bookContainer = document.getElementById('bb-bookblock');
-    bookContainer.style.height = myHeight + 'px';
-    $('#bb-bookblock').bookblock('jump', 5 );
+export const bookView = (ind, refBook, refGrid) => {
+    if (refBook.current.classList.contains('hidden')) {
+        refBook.current.classList.remove('hidden');
+        refGrid.current.classList.add('hidden');
+        let book = new Page();
+        book.init();
+        let myHeight = document.body.querySelector(".bb-item img").getBoundingClientRect().height;
+        let bookContainer = document.getElementById('bb-bookblock');
+        bookContainer.style.height = myHeight + 'px';
+    }
+    // $('.modal').animate({ scrollTop: 0 }, 'slow');
+    $('#bb-bookblock').bookblock('jump', ind+1 );
 };

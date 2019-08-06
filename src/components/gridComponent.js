@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useReducer, useRef} from 'react';
+import StackGrid from "react-stack-grid";
 import MyVerticallyCenteredModal from './modalElement';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
@@ -17,10 +18,6 @@ const GridElem = ({example}) => {
     };
 
     const checkPost = () => {
-        let postData = {
-            path: 'D:/TEMP/examples_galleries/',
-            number: '0001'
-        };
 
         toggleMenu(document.body.classList.contains('menu-expanded'));
         let test = ["17695-01.jpg", "17695-02.jpg", "17695-03.jpg", "17695-04.jpg", "17695-05.jpg", "17695-06.jpg", "17695-07.jpg", "17695-08.jpg", "17695-09.jpg", "17695-10.jpg", "17695-11.jpg", "17695-12.jpg", "17695-13.jpg", "17695-14.jpg", "17695-15.jpg", "17695-16.jpg", "17695-17.jpg", "17695-18.jpg", "17695-19.jpg", "17695-20.jpg", "17695-21.jpg", "17695-22.jpg", "17695-23.jpg", "17695-24.jpg"];
@@ -29,6 +26,10 @@ const GridElem = ({example}) => {
             num: example.number
         });
         setModalShow(true);
+        // let postData = {
+        //     path: 'D:/TEMP/examples_galleries/',
+        //     number: example.number,
+        // };
         // jQuery.post("http://localhost:69/gallery.php", postData, function(data, status) {
         //     if(status === 'success'){
         //         toggleMenu(document.body.classList.contains('menu-expanded'));
@@ -46,21 +47,34 @@ const GridElem = ({example}) => {
 
     return(
         <>
-            <div className="col-12 col-lg-6 col-xl-4" onClick={() => checkPost()}>
+            <div className="col-12 example-elem">
                 <div className="card">
                     <div className="full-width image-cover-box">
-                        <LazyLoadImage
+                        <img
+                            onClick={() => checkPost()}
+                            className="card-img-top img-fluid"
+                            src={`https://galleries.perspective-media.me/examples_galleries/${example.number}/${example.CoverImgUrl}`} alt=""
+                        />
+                        {/*<LazyLoadImage
                             className="card-img-top img-fluid"
                             src={`https://galleries.perspective-media.me/examples_galleries/${example.number}/${example.CoverImgUrl}`}
                             alt="Card image cap"
                             effect="opacity"
-                        />
+                        />*/}
                     </div>
                     <div className="card-body">
                         <h4 className="card-title">{example.products_caption}</h4>
                         <p className="card-text">
                             {example.event_caption}
                         </p>
+                        <i
+                            className="ft-info pull-right font-large-1 blue-grey"
+                            data-toggle="popover"
+                            data-placement="top"
+                            data-content="Tart macaroon marzipan I love soufflés apple pie wafer. Chocolate bar jelly caramels jujubes chocolate cake gummies."
+                            data-trigger="hover"
+                            data-original-title="Hover Triggered"
+                        />
                         <p className="card-text">
                             <small className="text-muted">
                                 {example.design_cat_caption}
@@ -117,7 +131,7 @@ const GridContainer = ({examples, filters, dispatch}) => {
                             </button>
                         }
                     </div>
-                    <div className="content-header-right col-md-9 col-sm-12 col-12 mb-2 row" ref={refValue}>
+                    <div className="content-headers-right col-md-9 col-sm-12 col-12 mb-2 row" ref={refValue}>
                         <ul className="nav col-md col-12">
                             {
                                 filtersList.map( groupName => {
@@ -129,12 +143,12 @@ const GridContainer = ({examples, filters, dispatch}) => {
                                                 {filters[groupName].map( filter => {
                                                     return !!parseInt(filter.selected) &&
                                                         <React.Fragment key={filter.id}>
-                                                            <span className="ml-1 text-white">{filter.caption} </span>
+                                                            <span className="msl-1 text-white">{filter.caption} </span>
                                                             <i
                                                                 className="ft-x-circle"
-                                                                onClick={() =>
-                                                                    dispatch({type: 'toggleFilter', groupName: groupName, item: filter})
-                                                                }
+                                                                onClick={() => {
+                                                                    dispatch({type: 'toggleFilter', groupName: groupName, item: filter});
+                                                                }}
                                                             />
                                                         </React.Fragment>
                                                 })}
@@ -148,8 +162,10 @@ const GridContainer = ({examples, filters, dispatch}) => {
                 </div>
                 <div className="content-body">
                     <div className="row">
-                        <div className="col-md-12 mt-1">
-                            <div className="row">
+                        <div className="col-12">
+                            <StackGrid
+                                columnWidth={window.innerWidth <= 768 ? '100%' : '33.33%'}
+                            >
                                 {
                                     examples.map( example => {
                                         return(
@@ -157,7 +173,7 @@ const GridContainer = ({examples, filters, dispatch}) => {
                                         )
                                     })
                                 }
-                            </div>
+                            </StackGrid>
                         </div>
                     </div>
                 </div>
