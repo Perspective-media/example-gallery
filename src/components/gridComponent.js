@@ -1,12 +1,18 @@
 import React, {useState, useEffect, useReducer, useRef} from 'react';
 import StackGrid from "react-stack-grid";
 import MyVerticallyCenteredModal from './modalElement';
+import CollectionComponent from './collectionComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
-const GridElem = ({example}) => {
+// ------------ ELEMENT --------------
+
+const GridElem = ({example, myGrid, dispatchExamples}) => {
     const [modalShow, setModalShow] = useState(false);
     const [posted, setPosted] = useState({});
+    const [infoStatus, setInfoStatus] = useState(false);
+
+    useEffect(() => myGrid.updateLayout(), [infoStatus]);
 
     const toggleMenu = (condition) => {
         condition && document.querySelector('.menu-toggle-handle').click();
@@ -57,28 +63,53 @@ const GridElem = ({example}) => {
                         />
                         {/*<LazyLoadImage
                             className="card-img-top img-fluid"
+                            onClick={() => checkPost()}
+                            afterLoad={myGrid.updateLayout()}
                             src={`https://galleries.perspective-media.me/examples_galleries/${example.number}/${example.CoverImgUrl}`}
                             alt="Card image cap"
                             effect="opacity"
                         />*/}
                     </div>
                     <div className="card-body">
-                        <h4 className="card-title">{example.products_caption}</h4>
+                        <div className="card-title">
+                            <h4>
+                                {example.products_caption}
+                            </h4>
+                            <h4>
+                                {example.files}
+                            </h4>
+                        </div>
                         <p className="card-text">
                             {example.event_caption}
                         </p>
-                        <i
-                            className="ft-info pull-right font-large-1 blue-grey"
-                            data-toggle="popover"
-                            data-placement="top"
-                            data-content="Tart macaroon marzipan I love soufflés apple pie wafer. Chocolate bar jelly caramels jujubes chocolate cake gummies."
-                            data-trigger="hover"
-                            data-original-title="Hover Triggered"
-                        />
+                        {
+                            infoStatus
+                            ? <div className="card-text">
+                                Here is a lot of new info
+                                <p>WOWOW</p>
+                                <p>NICE</p>
+                                Here is a lot of new info
+                                <p>WOWOW</p>
+                                <p>NICE</p>
+                                Here is a lot of new info
+                                <p>WOWOW</p>
+                                <p>NICE</p>
+                            </div>
+                            : null
+                        }
                         <p className="card-text">
-                            <small className="text-muted">
-                                {example.design_cat_caption}
+                            <small
+                                className="text-muted cursor-pointer"
+                                onClick={() => {
+                                    setInfoStatus(prev => !prev);
+                                }}
+                            >
+                                {infoStatus ? 'less info' :'more info...'}
                             </small>
+                            <i
+                                className={`${example.collected ? 'ft-check-circle' : 'ft-circle'} pull-right font-large-1`}
+                                onClick={() => dispatchExamples({type: 'collected', id: example.id})}
+                            />
                         </p>
                     </div>
                 </div>
@@ -93,7 +124,10 @@ const GridElem = ({example}) => {
 };
 
 
-const GridContainer = ({examples, filters, dispatch}) => {
+
+//----------- CONTAINER ---------------
+
+const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, myGrid, setMyGrid}) => {
     const refValue = useRef();
 
     const setHeight = () => {
@@ -109,10 +143,15 @@ const GridContainer = ({examples, filters, dispatch}) => {
         return () => {
             window.removeEventListener('resize', setHeight);
         }
-    },[filters]);
+    },[filters, examples]);
+
+    useEffect( () => {
+        myGrid && myGrid.updateLayout();
+    },[]);
 
     let filtersList = Object.keys(filters);
     let someChecked = filtersList.some( groupName => filters[groupName].some( filter => !!parseInt(filter.selected)));
+    let someCollected = examples.some( example => !!parseInt(example.collected) );
     return(
         <div className="app-content content">
             <div className="content-wrapper">
@@ -125,14 +164,14 @@ const GridContainer = ({examples, filters, dispatch}) => {
                             <button
                                 type="button"
                                 className="btn btn-sm btn-primary round btn-min-width mr-1 mb-1"
-                                onClick={() => dispatch({type: 'clearAll'})}
+                                onClick={() => dispatchFilters({type: 'clearAll'})}
                             >
                                 Clear all
                             </button>
                         }
                     </div>
                     <div className="content-headers-right col-md-9 col-sm-12 col-12 mb-2 row" ref={refValue}>
-                        <ul className="nav col-md col-12">
+                        <ul className="nav col-md-9 col-12">
                             {
                                 filtersList.map( groupName => {
                                     let isChecked = filters[groupName].filter( value => !!parseInt(value.selected));
@@ -147,7 +186,7 @@ const GridContainer = ({examples, filters, dispatch}) => {
                                                             <i
                                                                 className="ft-x-circle"
                                                                 onClick={() => {
-                                                                    dispatch({type: 'toggleFilter', groupName: groupName, item: filter});
+                                                                    dispatchFilters({type: 'toggleFilter', groupName: groupName, item: filter});
                                                                 }}
                                                             />
                                                         </React.Fragment>
@@ -158,6 +197,13 @@ const GridContainer = ({examples, filters, dispatch}) => {
                                 })
                             }
                         </ul>
+                        {
+                            someCollected
+                                ? <div className="col-md-3 col-12 text-right">
+                                    <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )}/>
+                                </div>
+                                : null
+                        }
                     </div>
                 </div>
                 <div className="content-body">
@@ -165,11 +211,14 @@ const GridContainer = ({examples, filters, dispatch}) => {
                         <div className="col-12">
                             <StackGrid
                                 columnWidth={window.innerWidth <= 768 ? '100%' : '33.33%'}
+                                gridRef={grid => {
+                                    setMyGrid(grid);
+                                }}
                             >
                                 {
                                     examples.map( example => {
                                         return(
-                                            !!example.filtered && <GridElem {...{example}} key={example.id}/>
+                                            !!example.filtered && <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>
                                         )
                                     })
                                 }

@@ -230,6 +230,14 @@
     ],
     "files": [
       {
+        "id": "20",
+        "name": "20",
+        "caption": "20",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
+      },
+      {
         "id": "30",
         "name": "30",
         "caption": "30",
@@ -252,6 +260,14 @@
         "des": null,
         "selected": "0",
         "searched": "0"
+      },
+      {
+        "id": "60",
+        "name": "60",
+        "caption": "60",
+        "des": null,
+        "selected": "0",
+        "searched": "0"
       }
     ]
   },
@@ -268,8 +284,7 @@
     {
       "id": "1",
       "number": "0003",
-      "files": "1",
-      "files_caption": "30",
+      "files": "30",
       "sizes_cat": "1",
       "sizes_cat_caption": "Panoramic",
       "design_cat": "2",
@@ -288,8 +303,7 @@
     {
       "id": "15",
       "number": "0002",
-      "files": "1",
-      "files_caption": "30",
+      "files": "60",
       "sizes_cat": "3",
       "sizes_cat_caption": "Square",
       "design_cat": "2",
@@ -308,8 +322,7 @@
     {
       "id": "2",
       "number": "0004",
-      "files": "1",
-      "files_caption": "30",
+      "files": "20",
       "sizes_cat": "1",
       "sizes_cat_caption": "Panoramic",
       "design_cat": "3",
@@ -329,7 +342,6 @@
       "id": "16",
       "number": "0001",
       "files": "30",
-      "files_caption": "30",
       "sizes_cat": "3",
       "sizes_cat_caption": "Square",
       "design_cat": "1",
@@ -349,7 +361,6 @@
       "id": "8",
       "number": "37894",
       "files": "25",
-      "files_caption": "25",
       "sizes_cat": "1",
       "sizes_cat_caption": "Panoramic",
       "design_cat": "4",
@@ -369,7 +380,6 @@
       "id": "3",
       "number": "124658",
       "files": "30",
-      "files_caption": "30",
       "sizes_cat": "2",
       "sizes_cat_caption": "Vertical",
       "design_cat": "1",
@@ -389,7 +399,6 @@
       "id": "7",
       "number": "32607",
       "files": "30",
-      "files_caption": "30",
       "sizes_cat": "2",
       "sizes_cat_caption": "Vertical",
       "design_cat": "3",
@@ -409,7 +418,6 @@
       "id": "5",
       "number": "0002",
       "files": "25",
-      "files_caption": "25",
       "sizes_cat": "3",
       "sizes_cat_caption": "Square",
       "design_cat": "2",
@@ -429,7 +437,6 @@
       "id": "6",
       "number": "0001",
       "files": "40",
-      "files_caption": "40",
       "sizes_cat": "3",
       "sizes_cat_caption": "Square",
       "design_cat": "1",

@@ -116,7 +116,7 @@ export const isEqual = (value, other) => {
 
 };
 
-export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, callback) => {
+export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, callback, picNumber) => {
     let filteredObjectList = [];
     //checking if some filter is exist
     let listOfFilters = Object.keys(filterList);
@@ -145,11 +145,19 @@ export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, c
                             : val.some( elemId => filter.id == elemId )
                         ));
                 });
-                    //returning boolean value true or false if all pushed condition in our multifilter is true
-                    return multifilters.every( val => val )}
+                //returning boolean value true or false if all pushed condition in our multifilter is true
+                return multifilters.every( val => val )}
             )() ? 1 : 0
         };
     });
+    filteredObjectList = picNumber && picNumber !== '' ? filteredObjectList.map( example => {
+        return parseInt(example.minPics) <= parseInt(picNumber) && parseInt(picNumber) <= parseInt(example.maxPics)
+            ? example
+            : {
+                ...example,
+                filtered: 0,
+            }
+    }) : filteredObjectList;
     callback && callback({type: 'showExisting', examples: filteredObjectList});
     return filteredObjectList;
 };

@@ -11,20 +11,30 @@ const App = () => {
     const [lastFilterGroup, setLastFilterGroup] = useState([]);
     const [fetchedExamples, setFetchedExamples] = useState([]);
 
+    const [picsValue, setPicsValue] = useState('');
+
+    //function of react-grid
+    const [myGrid, setMyGrid] = useState();
+
     const recurerFilters = (prevFilters, action) => {
-        console.log(action.type);
         switch (action.type){
             case 'fetched':
                 return action.state;
 
             case 'toggleFilter':
-                let itemIndex = prevFilters[action.groupName].findIndex( item => item.id === action.item.id);
-                let selectedNew = !!parseInt(action.item.selected) ? 0 : 1;
                 //way of copying nested object, i`m not sure if this is the best way
                 let newStateString = JSON.stringify(prevFilters);
                 let newState = JSON.parse(newStateString);
                 // end of copying
-                newState[action.groupName][itemIndex].selected = selectedNew;
+
+                if(action.groupName === 'pics') {
+
+                } else {
+                    let itemIndex = prevFilters[action.groupName].findIndex( item => item.id === action.item.id);
+                    let selectedNew = !!parseInt(action.item.selected) ? 0 : 1;
+                    newState[action.groupName][itemIndex].selected = selectedNew;
+                }
+
                 setLastFilterGroup( prevstate => {
                     let newStateGroup = [...prevstate];
                     let curIndex = newStateGroup.indexOf( action.groupName);
@@ -114,8 +124,18 @@ const App = () => {
             case 'fetched':
                 setFetchedExamples(action.state);
                 return action.state;
+            case 'collected':
+                let indexOfCollected = prevExamples.map( example => example.id).indexOf(action.id);
+                let collectedExamples = [...prevExamples];
+                let newCollcetedValue = !parseInt([...prevExamples][indexOfCollected].collected)
+                    ? 1 : 0;
+                collectedExamples[indexOfCollected] = {
+                    ...collectedExamples[indexOfCollected],
+                    collected: newCollcetedValue
+                };
+                return collectedExamples;
             case 'filtering':
-                return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback);
+                return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber);
         }
     };
 
@@ -133,25 +153,25 @@ const App = () => {
         getFetch();
     },[]);
 
-
     useEffect( () => {
         dispatchExamples({
                 type: 'filtering',
                 filters: filters,
-                callback: dispatchFilters
+                callback: dispatchFilters,
+                picNumber: picsValue,
             });
-    },[filters]);
+    },[filters, picsValue]);
 
     useEffect( () => {
         let promise = new Promise(function(resolve, reject) {
             resolve('Success');
         });
         promise.then((resolveMessage) => {
-            handleToggleMenu();
+            handleToggleMenu();/*
             createAndLoadScript('app_assets/ltr/app-assets/js/core/app-menu.js');
-            createAndLoadScript('app_assets/ltr/app-assets/js/core/app.js');
-            createAndLoadScript('app_assets/ltr/app-assets/js/scripts/popover/popover.min.js');
+            createAndLoadScript('app_assets/ltr/app-assets/js/core/app.js');*/
         });
+        myGrid && myGrid.updateLayout();
     },[]);
 
 
@@ -203,19 +223,63 @@ const App = () => {
                             filterNameList.map( item => {
                                 return (
                                     <FilterMenuComponent
-                                        data={filters[item]}
                                         groupName={item}
                                         key={item}
-                                        dispatch={dispatchFilters}
+                                        {...{examples, dispatchFilters, dispatchExamples, filters}}
                                     />
                                 )
                             })
                         }
+                        <li className="nav-item">
+                            <div className="card-accordion">
+                                <div className="card accordion-icon-rotate">
+                                    <div className="card-header2">
+                                        <button
+                                            className="btn btn-bg-gradient-x-purple-blue full-width collapse-icon"
+                                            type="button"
+                                            data-toggle="collapse"
+                                            data-target={`#pics`}
+                                            aria-expanded="false"
+                                        >
+                                            <span className="menu-title" >Pics</span>
+                                        </button>
+                                    </div>
+                                    <div id='pics' className="collapse" aria-labelledby="headingCOne">
+                                        <div className="input-group p-1">
+                                            <input
+                                                className="form-control border-bottom-blue-grey border-top-0 border-left-0 border-right-0 rounded-0"
+                                                type="search"
+                                                value={picsValue}
+                                                placeholder="quantity of your pics"
+                                                onChange={e => {
+                                                    let curVal = e.target.value;
+                                                    !isNaN(curVal) && setPicsValue(curVal);
+                                                }}
+                                            />
+                                            {
+                                                picsValue !== '' &&
+                                                <div className="input-group-append">
+                                                    <button
+                                                        className="btn btn-cancel-search btn-sm border-bottom-blue-grey border-top-0 border-left-0 border-right-0 rounded-0"
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setPicsValue('');
+                                                        }}
+                                                    >
+                                                        <i className="ft-x"/>
+                                                    </button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div className="navigation-background"></div>
             </div>
-            <GridContainer {...{examples, filters}} dispatch={dispatchFilters}/>
+            <GridContainer {...{examples, filters, dispatchExamples, dispatchFilters, myGrid, setMyGrid}}/>
         </>
     )
 };

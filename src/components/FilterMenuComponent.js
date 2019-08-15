@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
-import SimpleBar from 'simplebar';
-import RangeElement from './rangElement';
 import 'simplebar/dist/simplebar.min.css';
 
-const FilterMenuComponent = ({groupName, data, dispatch}) => {
+const FilterMenuComponent = ({groupName, filters, dispatchFilters}) => {
     const [inputText, setInputText] = useState('');
 
-    let availableFilters = data.filter( item => !!item.available);
+    let availableFilters = filters[groupName].filter( item => !!item.available);
 
     const searchFilters = (e, groupName) => {
         let val = e === '' ? '' : e.target.value;
         setInputText(val);
-        dispatch({type: 'searchFilters', groupName: groupName, value: val});
+        dispatchFilters({type: 'searchFilters', groupName: groupName, value: val});
     };
 
     return (
@@ -25,40 +23,21 @@ const FilterMenuComponent = ({groupName, data, dispatch}) => {
                             data-toggle="collapse"
                             data-target={`#${groupName}`}
                             aria-expanded="false"
-                            /*onClick={ (e) => {
-                                e.target.tagName === 'SPAN'
-                                    ? e.target.parentElement.parentElement.querySelector('.dropdown-menu').classList.toggle('show')
-                                    : e.target.parentElement.querySelector('.dropdown-menu').classList.toggle('show');
-                            }}*/
                         >
                             <span className="menu-title" >{groupName}</span>
                         </button>
                     </div>
                     <div id={groupName} className="collapse" aria-labelledby="headingCOne" >
-                        <div className="row">
-                            <div className="btn-group m-auto p-0">
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-primary round btn-sm border-0"
-                                    onClick={ e => dispatch({type: 'forAllInGroup', groupName: groupName, value: 1})}
-                                >
-                                    <i className="ft-check-square"/>
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-primary round btn-sm border-0 disabled"
-                                >
-                                    All
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-primary round btn-sm border-0"
-                                    onClick={ e => dispatch({type: 'forAllInGroup', groupName: groupName, value: 0})}
-                                >
-                                    <i className="ft-square"/>
-                                </button>
-                            </div>
-                        </div>
+                        {availableFilters.length > 1 && <div className="custom-control custom-checkbox col-12 bg-primary bg-accent-1 rounded">
+                            <input
+                                type="checkbox"
+                                id={groupName+'all'}
+                                className="custom-control-input bg-blue"
+                                onChange={ (e) => {
+                                    dispatchFilters({type: 'forAllInGroup', groupName: groupName, value: e.target.checked ? 1 : 0});
+                                }}/>
+                            <label htmlFor={groupName+'all'} className="custom-control-label">Select all</label>
+                        </div>}
                         {
                             availableFilters.length > 3 &&
                             <div className="input-group p-1">
@@ -85,10 +64,6 @@ const FilterMenuComponent = ({groupName, data, dispatch}) => {
                                 }
                             </div>
                         }
-                        {
-                            groupName === 'files' &&
-                            <RangeElement {...{availableFilters}}/>
-                        }
                         <div className="list-holder" data-simplebar>
                             <div>
                                 {
@@ -101,8 +76,7 @@ const FilterMenuComponent = ({groupName, data, dispatch}) => {
                                                     checked={parseInt(item.selected)}
                                                     className="custom-control-input bg-primary"
                                                     onChange={ () => {
-                                                        console.log('clicked');
-                                                        dispatch({type: 'toggleFilter', groupName: groupName, item: item});
+                                                        dispatchFilters({type: 'toggleFilter', groupName: groupName, item: item});
                                                     }}/>
                                                 <label htmlFor={groupName+item.id} className="custom-control-label">{item.caption}</label>
                                             </div>
