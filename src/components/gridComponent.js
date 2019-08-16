@@ -200,7 +200,7 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
                         {
                             someCollected
                                 ? <div className="col-md-3 col-12 text-right">
-                                    <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )}/>
+                                    <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )} dispatchExamples={dispatchExamples}/>
                                 </div>
                                 : null
                         }
@@ -215,10 +215,15 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
                                     setMyGrid(grid);
                                 }}
                             >
+                                {/*{*/}
+                                    {/*examples.filter( example => !!example.collected ).map( example => {*/}
+                                        {/*return <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>*/}
+                                    {/*})*/}
+                                {/*}*/}
                                 {
                                     examples.map( example => {
                                         return(
-                                            !!example.filtered && <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>
+                                            (!!example.collected || !!example.filtered) && <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>
                                         )
                                     })
                                 }

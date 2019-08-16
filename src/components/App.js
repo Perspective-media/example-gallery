@@ -11,6 +11,7 @@ const App = () => {
     const [lastFilterGroup, setLastFilterGroup] = useState([]);
     const [fetchedExamples, setFetchedExamples] = useState([]);
 
+    //
     const [picsValue, setPicsValue] = useState('');
 
     //function of react-grid
@@ -134,6 +135,8 @@ const App = () => {
                     collected: newCollcetedValue
                 };
                 return collectedExamples;
+            case 'clearAll':
+                return [...prevExamples].map( example => { return {...example, collected: 0}});
             case 'filtering':
                 return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber);
         }
