@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Dropdown, Card, Button, ListGroup} from 'react-bootstrap';
 
-const CollectionComponent = ({examples, dispatchExamples}) => {
+const CollectionComponent = ({examples, dispatchExamples, setShowCollected}) => {
     console.log(examples);
     return (
         <Dropdown>
@@ -19,6 +19,10 @@ const CollectionComponent = ({examples, dispatchExamples}) => {
                             className="btn-outline-primary btn"
                             onClick={() => dispatchExamples({type: 'clearAll'})}
                         >DELETE ALL</Button>
+                        <Button
+                            className="btn-outline-primary btn"
+                            onClick={() => setShowCollected((prev) => !prev)}
+                        >Show collected</Button>
                         <ListGroup variant="flush" className="m-1">
                             {
                                 examples.map( example => {

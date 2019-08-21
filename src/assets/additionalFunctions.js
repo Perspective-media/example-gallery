@@ -116,7 +116,7 @@ export const isEqual = (value, other) => {
 
 };
 
-export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, callback, picNumber) => {
+export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, callback, picNumber, showCollected) => {
     let filteredObjectList = [];
     //checking if some filter is exist
     let listOfFilters = Object.keys(filterList);
@@ -150,15 +150,30 @@ export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, c
             )() ? 1 : 0
         };
     });
-    filteredObjectList = picNumber && picNumber !== '' ? filteredObjectList.map( example => {
-        return parseInt(example.minPics) <= parseInt(picNumber) && parseInt(picNumber) <= parseInt(example.maxPics)
-            ? example
-            : {
-                ...example,
-                filtered: 0,
-            }
-    }) : filteredObjectList;
-    callback && callback({type: 'showExisting', examples: filteredObjectList});
+
+    filteredObjectList = showCollected
+        ? filteredObjectList.map( example => {
+            return !!parseInt(example.collected)
+                ? example
+                : {
+                    ...example,
+                    filtered: 0,
+                }
+        })
+        : filteredObjectList;
+    filteredObjectList = picNumber && picNumber !== ''
+        ? filteredObjectList.map( example => {
+            return parseInt(example.minPics) <= parseInt(picNumber) && parseInt(picNumber) <= parseInt(example.maxPics)
+                ? example
+                : {
+                    ...example,
+                    filtered: 0,
+                }
+        })
+        : filteredObjectList;
+    callback && callback({type: 'showExisting', examples: showCollected
+            ? filteredObjectList.filter(example => !!parseInt(example.filtered))
+            : filteredObjectList});
     return filteredObjectList;
 };
 

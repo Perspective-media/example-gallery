@@ -127,7 +127,7 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
 
 //----------- CONTAINER ---------------
 
-const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, myGrid, setMyGrid}) => {
+const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, myGrid, setMyGrid, setShowCollected}) => {
     const refValue = useRef();
 
     const setHeight = () => {
@@ -200,7 +200,7 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
                         {
                             someCollected
                                 ? <div className="col-md-3 col-12 text-right">
-                                    <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )} dispatchExamples={dispatchExamples}/>
+                                    <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )} {...{dispatchExamples, setShowCollected}}/>
                                 </div>
                                 : null
                         }

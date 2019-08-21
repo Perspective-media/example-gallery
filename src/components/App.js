@@ -10,9 +10,13 @@ const App = () => {
 
     const [lastFilterGroup, setLastFilterGroup] = useState([]);
     const [fetchedExamples, setFetchedExamples] = useState([]);
+    const [collectedExamples, setCollectedExamples] = useState([]);
 
-    //
+    // for pics quantity filtering
     const [picsValue, setPicsValue] = useState('');
+
+    // collection view
+    const [showCollected, setShowCollected] = useState(false);
 
     //function of react-grid
     const [myGrid, setMyGrid] = useState();
@@ -74,7 +78,7 @@ const App = () => {
                         ? action.examples.map( example => {
                             listOfAvailableFunc(example, filter, listOfAvailable);
                         })
-                        : virtualFiltering(filter, prevFilters, fetchedExamples).map( example => {
+                        : virtualFiltering(filter, prevFilters, showCollected ? collectedExamples : fetchedExamples).map( example => {
                             listOfAvailableFunc(example, filter, listOfAvailable);
                         })
                 });
@@ -137,6 +141,13 @@ const App = () => {
                 return collectedExamples;
             case 'clearAll':
                 return [...prevExamples].map( example => { return {...example, collected: 0}});
+            case 'showCollected':
+                return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber, action.showCollected);
+                // let collectedOnlyExamples = [...prevExamples].map( example => {
+                //     return {...example, filtered: !!parseInt(example.collected) ? 1 : 0}
+                // });
+                // action.callback && action.callback({type: 'showExisting', examples: collectedOnlyExamples.filter( example => !!parseInt(example.filtered) )});
+                // return collectedOnlyExamples;
             case 'filtering':
                 return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber);
         }
@@ -157,13 +168,15 @@ const App = () => {
     },[]);
 
     useEffect( () => {
+        setCollectedExamples(examples.filter(example => !!parseInt(example.collected)));
         dispatchExamples({
-                type: 'filtering',
-                filters: filters,
-                callback: dispatchFilters,
-                picNumber: picsValue,
-            });
-    },[filters, picsValue]);
+            type: 'showCollected',
+            filters: filters,
+            callback: dispatchFilters,
+            picNumber: picsValue,
+            showCollected: showCollected
+        });
+    },[filters, picsValue, showCollected]);
 
     useEffect( () => {
         let promise = new Promise(function(resolve, reject) {
@@ -282,7 +295,7 @@ const App = () => {
                 </div>
                 <div className="navigation-background"></div>
             </div>
-            <GridContainer {...{examples, filters, dispatchExamples, dispatchFilters, myGrid, setMyGrid}}/>
+            <GridContainer {...{examples, filters, dispatchExamples, dispatchFilters, myGrid, setMyGrid, setShowCollected}}/>
         </>
     )
 };
