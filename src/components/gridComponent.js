@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useReducer, useRef} from 'react';
 import StackGrid from "react-stack-grid";
 import MyVerticallyCenteredModal from './modalElement';
-import CollectionComponent from './collectionComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import {toggleMenu} from '../assets/additionalFunctions';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 // ------------ ELEMENT --------------
@@ -11,11 +11,27 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
     const [modalShow, setModalShow] = useState(false);
     const [posted, setPosted] = useState({});
     const [infoStatus, setInfoStatus] = useState(false);
+    const imageRef = useRef();
+    // const [heightStyle, setStyleHeight] = useState({});
 
-    useEffect(() => myGrid.updateLayout(), [infoStatus]);
+    useEffect(() => {
+        setTimeout( () => {
+            myGrid.updateLayout();
+        },1000);
+    },[]);
 
-    const toggleMenu = (condition) => {
-        condition && document.querySelector('.menu-toggle-handle').click();
+    const toggleInfoStatus = () => {
+        let cardPosition = parseInt(imageRef.current.parentElement.style.transform.split('translateY(')[1].split('px)')[0]);
+        let cardHeight = imageRef.current.firstElementChild.offsetHeight;
+        let cardContainer = imageRef.current.parentElement.parentElement;
+        !infoStatus && parseInt(cardContainer.style.height) < (cardPosition + cardHeight + 300)
+                ? cardContainer.style.height = cardPosition + cardHeight + 300 + 'px'
+                : null;
+        setInfoStatus(prev => {
+            imageRef.current.parentElement.style.zIndex = prev ? 2 : 999;
+            imageRef.current.firstElementChild.style.boxShadow = prev ? '' : '0px 10px 20px 1px rgba(57, 57, 57, .9)';
+            return !prev;
+        });
     };
 
     const modalClose = () => {
@@ -24,8 +40,7 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
     };
 
     const checkPost = () => {
-
-        toggleMenu(document.body.classList.contains('menu-expanded'));
+        toggleMenu(window.innerWidth > 992 ? document.body.classList.contains('menu-expanded') : document.body.classList.contains('menu-open') );
         let test = ["17695-01.jpg", "17695-02.jpg", "17695-03.jpg", "17695-04.jpg", "17695-05.jpg", "17695-06.jpg", "17695-07.jpg", "17695-08.jpg", "17695-09.jpg", "17695-10.jpg", "17695-11.jpg", "17695-12.jpg", "17695-13.jpg", "17695-14.jpg", "17695-15.jpg", "17695-16.jpg", "17695-17.jpg", "17695-18.jpg", "17695-19.jpg", "17695-20.jpg", "17695-21.jpg", "17695-22.jpg", "17695-23.jpg", "17695-24.jpg"];
         setPosted({
             list: test,
@@ -53,9 +68,13 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
 
     return(
         <>
-            <div className="col-12 example-elem">
+            <div className="col-12 example-elem" ref={imageRef}>
                 <div className="card">
                     <div className="full-width image-cover-box">
+                        <i
+                            className={`${example.collected ? 'ft-check-circle' : 'ft-circle'} font-large-1 position-absolute zindex-4 collectionIcon`}
+                            onClick={() => dispatchExamples({type: 'collected', id: example.id})}
+                        />
                         <img
                             onClick={() => checkPost()}
                             className="card-img-top img-fluid"
@@ -70,7 +89,14 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
                             effect="opacity"
                         />*/}
                     </div>
-                    <div className="card-body">
+                    <div className="card-body"
+                         onMouseEnter={(e) => {
+                             window.innerWidth >= 768 ? toggleInfoStatus() : null;
+                         }}
+                         onMouseLeave={ () => {
+                             window.innerWidth >= 768 ? toggleInfoStatus() : null;
+                         }}
+                    >
                         <div className="card-title">
                             <h4>
                                 {example.products_caption}
@@ -82,10 +108,11 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
                         <p className="card-text">
                             {example.event_caption}
                         </p>
+
+                        <hr/>
                         {
                             infoStatus
                             ? <div className="card-text">
-                                Here is a lot of new info
                                 <p>WOWOW</p>
                                 <p>NICE</p>
                                 Here is a lot of new info
@@ -100,16 +127,10 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
                         <p className="card-text">
                             <small
                                 className="text-muted cursor-pointer"
-                                onClick={() => {
-                                    setInfoStatus(prev => !prev);
-                                }}
+                                onClick={() => toggleInfoStatus()}
                             >
                                 {infoStatus ? 'less info' :'more info...'}
                             </small>
-                            <i
-                                className={`${example.collected ? 'ft-check-circle' : 'ft-circle'} pull-right font-large-1`}
-                                onClick={() => dispatchExamples({type: 'collected', id: example.id})}
-                            />
                         </p>
                     </div>
                 </div>
@@ -127,7 +148,7 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
 
 //----------- CONTAINER ---------------
 
-const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, myGrid, setMyGrid, setShowCollected}) => {
+const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, myGrid, setMyGrid, showCollected, setShowCollected}) => {
     const refValue = useRef();
 
     const setHeight = () => {
@@ -151,7 +172,6 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
 
     let filtersList = Object.keys(filters);
     let someChecked = filtersList.some( groupName => filters[groupName].some( filter => !!parseInt(filter.selected)));
-    let someCollected = examples.some( example => !!parseInt(example.collected) );
     return(
         <div className="app-content content">
             <div className="content-wrapper">
@@ -171,7 +191,7 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
                         }
                     </div>
                     <div className="content-headers-right col-md-9 col-sm-12 col-12 mb-2 row" ref={refValue}>
-                        <ul className="nav col-md-9 col-12">
+                        <ul className="nav col-12">
                             {
                                 filtersList.map( groupName => {
                                     let isChecked = filters[groupName].filter( value => !!parseInt(value.selected));
@@ -197,13 +217,6 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
                                 })
                             }
                         </ul>
-                        {
-                            someCollected
-                                ? <div className="col-md-3 col-12 text-right">
-                                    <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )} {...{dispatchExamples, setShowCollected}}/>
-                                </div>
-                                : null
-                        }
                     </div>
                 </div>
                 <div className="content-body">
@@ -211,20 +224,19 @@ const GridContainer = ({examples, filters, dispatchFilters, dispatchExamples, my
                         <div className="col-12">
                             <StackGrid
                                 columnWidth={window.innerWidth <= 768 ? '100%' : '33.33%'}
+                                duration={300}
                                 gridRef={grid => {
                                     setMyGrid(grid);
                                 }}
                             >
-                                {/*{*/}
-                                    {/*examples.filter( example => !!example.collected ).map( example => {*/}
-                                        {/*return <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>*/}
-                                    {/*})*/}
-                                {/*}*/}
                                 {
                                     examples.map( example => {
-                                        return(
-                                            (!!example.collected || !!example.filtered) && <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>
+                                        return (
+                                            showCollected
+                                                ? !!parseInt(example.filtered)
+                                                : !!parseInt(example.collected) || !!parseInt(example.filtered)
                                         )
+                                        && <GridElem {...{example, myGrid, dispatchExamples}} key={example.id}/>
                                     })
                                 }
                             </StackGrid>

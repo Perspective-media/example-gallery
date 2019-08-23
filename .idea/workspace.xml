@@ -4,6 +4,7 @@
     <list default="true" id="e023a9ac-8d51-4546-8901-fa3f4911870e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/additionalFunctions.js" afterPath="$PROJECT_DIR$/src/assets/additionalFunctions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/style.css" afterPath="$PROJECT_DIR$/src/assets/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App.js" afterPath="$PROJECT_DIR$/src/components/App.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/collectionComponent.js" afterPath="$PROJECT_DIR$/src/components/collectionComponent.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/gridComponent.js" afterPath="$PROJECT_DIR$/src/components/gridComponent.js" />
@@ -19,14 +20,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5630208">
+    <splitter split-orientation="horizontal" split-proportion="0.44791666">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="data.json" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dist/data.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="578">
-                  <caret line="297" column="14" lean-forward="false" selection-start-line="297" selection-start-column="7" selection-end-line="297" selection-end-column="14" />
+                <state relative-caret-position="221">
+                  <caret line="284" column="16" lean-forward="true" selection-start-line="284" selection-start-column="16" selection-end-line="284" selection-end-column="16" />
                   <folding>
                     <element signature="e#37#1451#0" expanded="false" />
                     <element signature="e#1466#2289#0" expanded="false" />
@@ -35,26 +36,17 @@
                     <element signature="e#3533#4165#0" expanded="false" />
                     <element signature="e#4179#4653#0" expanded="false" />
                     <element signature="e#4668#5444#0" expanded="false" />
+                    <element signature="n#!!block;n#quary#0;n#!!top" expanded="false" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+          <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/assets/style.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="861">
-                  <caret line="230" column="1" lean-forward="false" selection-start-line="230" selection-start-column="1" selection-end-line="230" selection-end-column="1" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="additionalFunctions.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/assets/additionalFunctions.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1765">
-                  <caret line="146" column="19" lean-forward="true" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
+                <state relative-caret-position="419">
+                  <caret line="162" column="18" lean-forward="true" selection-start-line="162" selection-start-column="18" selection-end-line="162" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -63,8 +55,8 @@
           <file leaf-file-name="FilterMenuComponent.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/FilterMenuComponent.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="578">
-                  <caret line="49" column="34" lean-forward="true" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+                <state relative-caret-position="427">
+                  <caret line="60" column="65" lean-forward="true" selection-start-line="60" selection-start-column="65" selection-end-line="60" selection-end-column="65" />
                   <folding>
                     <element signature="e#0#38#0" expanded="true" />
                   </folding>
@@ -75,8 +67,8 @@
           <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/App.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2142">
-                  <caret line="21" column="43" lean-forward="true" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+                <state relative-caret-position="288">
+                  <caret line="237" column="95" lean-forward="false" selection-start-line="237" selection-start-column="95" selection-end-line="237" selection-end-column="95" />
                   <folding>
                     <element signature="e#0#69#0" expanded="true" />
                   </folding>
@@ -98,26 +90,34 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="modalElement.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="modalElement.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/modalElement.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1377">
-                  <caret line="81" column="58" lean-forward="false" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
-                  <folding>
-                    <element signature="e#0#36#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="34">
+                  <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="gridComponent.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="additionalFunctions.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/assets/additionalFunctions.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="543">
+                  <caret line="207" column="23" lean-forward="false" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="gridComponent.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/gridComponent.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="881">
-                  <caret line="227" column="38" lean-forward="true" selection-start-line="227" selection-start-column="38" selection-end-line="227" selection-end-column="38" />
+                <state relative-caret-position="272">
+                  <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#69#0" expanded="true" />
-                    <marker date="1565972212000" expanded="true" signature="5286:5399" ph="..." />
+                    <marker date="1566569118604" expanded="true" signature="6428:6541" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -126,11 +126,9 @@
           <file leaf-file-name="collectionComponent.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/collectionComponent.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="19" column="80" lean-forward="true" selection-start-line="19" selection-start-column="80" selection-end-line="19" selection-end-column="80" />
-                  <folding>
-                    <element signature="e#0#38#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="0">
+                  <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -149,25 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>files</find>
-      <find>files_cat</find>
-      <find>files_cat_caption</find>
-      <find>info</find>
-      <find>avail</find>
-      <find>available</find>
-      <find>heigh</find>
-      <find>dispatchFilters</find>
-      <find>index</find>
-      <find>indexof</find>
-      <find>rang</find>
-      <find>ran</find>
-      <find>dispatch</find>
-      <find>avai</find>
-      <find>data</find>
-      <find>virtualFiltering</find>
-      <find>filter</find>
-      <find>cap</find>
-      <find>caprio</find>
       <find>collec</find>
       <find>class</find>
       <find>showExisting</find>
@@ -179,6 +158,25 @@
       <find>listofa</find>
       <find>curVal</find>
       <find>consol</find>
+      <find>collectedExamples</find>
+      <find>setShowCollected</find>
+      <find>some</find>
+      <find>collected</find>
+      <find>listofavailablefun</find>
+      <find>styleHe</find>
+      <find>heightS</find>
+      <find>listOfAvailableFunc</find>
+      <find>item</find>
+      <find>myGrid</find>
+      <find>collecte</find>
+      <find>collection</find>
+      <find>999</find>
+      <find>mou</find>
+      <find>ft-x</find>
+      <find>toggleMenu</find>
+      <find>img</find>
+      <find>body</find>
+      <find>updateLayout</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;:</replace>
@@ -201,6 +199,7 @@
       <replace>files_caption</replace>
       <replace>dispatchFilters</replace>
       <replace>className</replace>
+      <replace>getListOfAvailableFunc</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -222,17 +221,17 @@
         <option value="$PROJECT_DIR$/dist/app_assets/ltr/app-assets/js/core/app-menu.js" />
         <option value="$PROJECT_DIR$/dist/bundle.js" />
         <option value="$PROJECT_DIR$/dist/assets/css/book/demo1.css" />
-        <option value="$PROJECT_DIR$/src/assets/style.css" />
         <option value="$PROJECT_DIR$/src/components/rangElement.js" />
-        <option value="$PROJECT_DIR$/src/components/modalElement.js" />
         <option value="$PROJECT_DIR$/dist/index.html" />
         <option value="$PROJECT_DIR$/src/components/rangeElement.js" />
         <option value="$PROJECT_DIR$/src/components/FilterMenuComponent.js" />
         <option value="$PROJECT_DIR$/dist/data.json" />
+        <option value="$PROJECT_DIR$/src/assets/additionalFunctions.js" />
+        <option value="$PROJECT_DIR$/src/components/modalElement.js" />
         <option value="$PROJECT_DIR$/src/components/collectionComponent.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
+        <option value="$PROJECT_DIR$/src/assets/style.css" />
         <option value="$PROJECT_DIR$/src/components/gridComponent.js" />
-        <option value="$PROJECT_DIR$/src/assets/additionalFunctions.js" />
       </list>
     </option>
   </component>
@@ -408,12 +407,12 @@
       <workItem from="1564149087690" duration="116057000" />
       <workItem from="1565682698358" duration="474000" />
       <workItem from="1565684395883" duration="28752000" />
-      <workItem from="1565853657031" duration="14234000" />
+      <workItem from="1565853657031" duration="60027000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="497822000" />
+    <option name="totallyTimeSpent" value="543615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -508,7 +507,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#69#0" expanded="true" />
-            <marker date="1565972212000" expanded="true" signature="5286:5399" ph="..." />
+            <marker date="1566569118604" expanded="true" signature="6428:6541" ph="..." />
           </folding>
         </state>
       </provider>
@@ -568,7 +567,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#69#0" expanded="true" />
-            <marker date="1565972212000" expanded="true" signature="5286:5399" ph="..." />
+            <marker date="1566569118604" expanded="true" signature="6428:6541" ph="..." />
           </folding>
         </state>
       </provider>
@@ -778,8 +777,8 @@
     <entry file="file://$PROJECT_DIR$/src/components/rangeElement.js" />
     <entry file="file://$PROJECT_DIR$/dist/data.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="297" column="14" lean-forward="false" selection-start-line="297" selection-start-column="7" selection-end-line="297" selection-end-column="14" />
+        <state relative-caret-position="221">
+          <caret line="284" column="16" lean-forward="true" selection-start-line="284" selection-start-column="16" selection-end-line="284" selection-end-column="16" />
           <folding>
             <element signature="e#37#1451#0" expanded="false" />
             <element signature="e#1466#2289#0" expanded="false" />
@@ -788,73 +787,70 @@
             <element signature="e#3533#4165#0" expanded="false" />
             <element signature="e#4179#4653#0" expanded="false" />
             <element signature="e#4668#5444#0" expanded="false" />
+            <element signature="n#!!block;n#quary#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="861">
-          <caret line="230" column="1" lean-forward="false" selection-start-line="230" selection-start-column="1" selection-end-line="230" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/FilterMenuComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="49" column="34" lean-forward="true" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+        <state relative-caret-position="427">
+          <caret line="60" column="65" lean-forward="true" selection-start-line="60" selection-start-column="65" selection-end-line="60" selection-end-column="65" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2142">
-          <caret line="21" column="43" lean-forward="true" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/additionalFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1765">
-          <caret line="146" column="19" lean-forward="true" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/collectionComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="80" lean-forward="true" selection-start-line="19" selection-start-column="80" selection-end-line="19" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="38" lean-forward="true" selection-start-line="0" selection-start-column="38" selection-end-line="0" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/gridComponent.js">
+    <entry file="file://$PROJECT_DIR$/src/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="881">
-          <caret line="227" column="38" lean-forward="true" selection-start-line="227" selection-start-column="38" selection-end-line="227" selection-end-column="38" />
+        <state relative-caret-position="288">
+          <caret line="237" column="95" lean-forward="false" selection-start-line="237" selection-start-column="95" selection-end-line="237" selection-end-column="95" />
           <folding>
             <element signature="e#0#69#0" expanded="true" />
-            <marker date="1565972212000" expanded="true" signature="5286:5399" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/modalElement.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="81" column="58" lean-forward="false" selection-start-line="81" selection-start-column="58" selection-end-line="81" selection-end-column="58" />
+        <state relative-caret-position="34">
+          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/additionalFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="207" column="23" lean-forward="false" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="162" column="18" lean-forward="true" selection-start-line="162" selection-start-column="18" selection-end-line="162" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/gridComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#69#0" expanded="true" />
+            <marker date="1566569118604" expanded="true" signature="6428:6541" ph="..." />
           </folding>
         </state>
       </provider>

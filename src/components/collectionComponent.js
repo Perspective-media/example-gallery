@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Dropdown, Card, Button, ListGroup} from 'react-bootstrap';
 
 const CollectionComponent = ({examples, dispatchExamples, setShowCollected}) => {
-    console.log(examples);
+    let someCollected = examples.length > 0 ? true : false;
     return (
         <Dropdown>
             <Dropdown.Toggle className="btn btn-outline-primary btn-sm">
@@ -17,12 +17,24 @@ const CollectionComponent = ({examples, dispatchExamples, setShowCollected}) => 
                         </Card.Text>
                         <Button
                             className="btn-outline-primary btn"
-                            onClick={() => dispatchExamples({type: 'clearAll'})}
-                        >DELETE ALL</Button>
-                        <Button
-                            className="btn-outline-primary btn"
-                            onClick={() => setShowCollected((prev) => !prev)}
-                        >Show collected</Button>
+                            onClick={() => dispatchExamples({type: 'addAll'})}>
+                            ADD ALL
+                        </Button>
+                        {
+                            someCollected &&
+                            <>
+                                <Button
+                                    className="btn-outline-primary btn"
+                                    onClick={() => dispatchExamples({type: 'clearAll'})}>
+                                        DELETE ALL
+                                </Button>
+                                <Button
+                                    className="btn-outline-primary btn"
+                                    onClick={() => setShowCollected((prev) => !prev)}>
+                                    Show collected
+                                </Button>
+                            </>
+                        }
                         <ListGroup variant="flush" className="m-1">
                             {
                                 examples.map( example => {

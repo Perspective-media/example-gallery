@@ -153,6 +153,13 @@ body.vertical-layout.vertical-menu.menu-collapsed .navbar-header {
     transform: scale(1.01);
 }
 
+.collectionIcon{
+    top: 10px;
+    right: 10px;
+    color: white;
+}
+
+
 .image-cover-box {
     height: auto;
     width: 100%;

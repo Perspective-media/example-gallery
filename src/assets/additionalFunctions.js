@@ -17,6 +17,9 @@ export const sortBy = (arr, field) => {
     return arr;
 };
 
+export const toggleMenu = (condition) => {
+    condition && document.querySelector('.menu-toggle-handle').click();
+};
 
 export const apiConnetcion = (apiKey) => {
     function get(route) {
@@ -177,7 +180,7 @@ export const virtualFiltering = (excludeFilterGroup, filterList, prevExamples, c
     return filteredObjectList;
 };
 
-export const listOfAvailableFunc = (example, filter, listOfAvailable) => {
+export const getListOfAvailableFunc = (example, filter, listOfAvailable) => {
     !!parseInt(example.filtered) && (
         typeof example[filter] === 'string'
             ? !listOfAvailable[filter].includes(example[filter]) &&

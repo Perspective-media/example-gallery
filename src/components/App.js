@@ -1,7 +1,8 @@
 import React,{useState, useMemo, useEffect, useReducer} from 'react';
 import FilterMenuComponent from './FilterMenuComponent';
+import CollectionComponent from './collectionComponent';
 import GridContainer from './gridComponent';
-import {isEqual, virtualFiltering, listOfAvailableFunc, createAndLoadScript, handleToggleMenu} from '../assets/additionalFunctions';
+import {isEqual, virtualFiltering, getListOfAvailableFunc, createAndLoadScript, handleToggleMenu, toggleMenu} from '../assets/additionalFunctions';
 import '../assets/style.css';
 require('babel-polyfill');
 import axios from 'axios';
@@ -76,10 +77,10 @@ const App = () => {
                     listOfAvailable[filter] = [];
                     fetchedExamples.length !== 0 && !lastFilterGroup.includes(filter)
                         ? action.examples.map( example => {
-                            listOfAvailableFunc(example, filter, listOfAvailable);
+                            getListOfAvailableFunc(example, filter, listOfAvailable);
                         })
-                        : virtualFiltering(filter, prevFilters, showCollected ? collectedExamples : fetchedExamples).map( example => {
-                            listOfAvailableFunc(example, filter, listOfAvailable);
+                        : virtualFiltering(filter, prevFilters, showCollected ? collectedExamples : fetchedExamples, ).map( example => {
+                            getListOfAvailableFunc(example, filter, listOfAvailable);
                         })
                 });
                 //deep copy obj
@@ -139,17 +140,14 @@ const App = () => {
                     collected: newCollcetedValue
                 };
                 return collectedExamples;
+            case 'addAll':
+                return [...prevExamples].map( example => {
+                    return !!parseInt(example.filtered) ? {...example, collected: 1} : example
+                });
             case 'clearAll':
                 return [...prevExamples].map( example => { return {...example, collected: 0}});
-            case 'showCollected':
-                return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber, action.showCollected);
-                // let collectedOnlyExamples = [...prevExamples].map( example => {
-                //     return {...example, filtered: !!parseInt(example.collected) ? 1 : 0}
-                // });
-                // action.callback && action.callback({type: 'showExisting', examples: collectedOnlyExamples.filter( example => !!parseInt(example.filtered) )});
-                // return collectedOnlyExamples;
             case 'filtering':
-                return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber);
+                return virtualFiltering('nothing here to exclude', action.filters, prevExamples, action.callback, action.picNumber, action.showCollected);
         }
     };
 
@@ -170,13 +168,18 @@ const App = () => {
     useEffect( () => {
         setCollectedExamples(examples.filter(example => !!parseInt(example.collected)));
         dispatchExamples({
-            type: 'showCollected',
+            type: 'filtering',
             filters: filters,
             callback: dispatchFilters,
             picNumber: picsValue,
             showCollected: showCollected
         });
     },[filters, picsValue, showCollected]);
+
+    useEffect( () => {
+        setCollectedExamples(examples.filter(example => !!parseInt(example.collected)));
+        !examples.some(example => !!parseInt(example.collected)) && setShowCollected(false);
+    }, [examples]);
 
     useEffect( () => {
         let promise = new Promise(function(resolve, reject) {
@@ -187,7 +190,6 @@ const App = () => {
             createAndLoadScript('app_assets/ltr/app-assets/js/core/app-menu.js');
             createAndLoadScript('app_assets/ltr/app-assets/js/core/app.js');*/
         });
-        myGrid && myGrid.updateLayout();
     },[]);
 
 
@@ -211,7 +213,10 @@ const App = () => {
                                     </a>
                                 </li>
                             </ul>
-                            <ul className="nav navbar-nav float-right">
+                            <ul className="nav navbar-nav float-right mt-2 mt-lg-0">
+                                    <div className="col-md-3 col-12 text-right">
+                                        <CollectionComponent examples={examples.filter( example => !!parseInt(example.collected) )} {...{dispatchExamples, setShowCollected}}/>
+                                    </div>
                             </ul>
                         </div>
                     </div>
@@ -226,9 +231,12 @@ const App = () => {
                                 <h3 className="brand-text">Filters</h3>
                             </a>
                         </li>
-                        <li className="nav-item d-md-none">
+                        <li className="nav-item d-lg-none">
                             <a className="nav-link close-navbar">
-                                <i className="ft-x"></i>
+                                <i
+                                    className="ft-x"
+                                    onClick={() => toggleMenu(document.body.classList.contains('menu-expanded'))}
+                                />
                             </a>
                         </li>
                     </ul>
@@ -295,7 +303,7 @@ const App = () => {
                 </div>
                 <div className="navigation-background"></div>
             </div>
-            <GridContainer {...{examples, filters, dispatchExamples, dispatchFilters, myGrid, setMyGrid, setShowCollected}}/>
+            <GridContainer {...{examples, filters, dispatchExamples, dispatchFilters, myGrid, setMyGrid, showCollected, setShowCollected}}/>
         </>
     )
 };
