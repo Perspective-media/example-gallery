@@ -13,6 +13,7 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
     const [infoStatus, setInfoStatus] = useState(false);
     const imageRef = useRef();
     // const [heightStyle, setStyleHeight] = useState({});
+    // useEffect(() => myGrid.updateLayout(), [infoStatus]);
 
     useEffect(() => {
         setTimeout( () => {
@@ -72,7 +73,7 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
                 <div className="card">
                     <div className="full-width image-cover-box">
                         <i
-                            className={`${example.collected ? 'ft-check-circle' : 'ft-circle'} font-large-1 position-absolute zindex-4 collectionIcon`}
+                            className={`${example.collected ? 'ft-check-circle blue' : 'ft-circle'} font-large-1 position-absolute zindex-4 collectionIcon`}
                             onClick={() => dispatchExamples({type: 'collected', id: example.id})}
                         />
                         <img
@@ -89,7 +90,7 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
                             effect="opacity"
                         />*/}
                     </div>
-                    <div className="card-body"
+                    <div className={`${example.collected && 'collected-card-border'} card-body`}
                          onMouseEnter={(e) => {
                              window.innerWidth >= 768 ? toggleInfoStatus() : null;
                          }}
@@ -98,38 +99,40 @@ const GridElem = ({example, myGrid, dispatchExamples}) => {
                          }}
                     >
                         <div className="card-title">
-                            <h4>
+                            <h4 className="text-bold-700">
                                 {example.products_caption}
-                            </h4>
-                            <h4>
-                                {example.files}
+                                <span className="float-right">
+                                    {example.files} pages
+                                </span>
                             </h4>
                         </div>
                         <p className="card-text">
                             {example.event_caption}
                         </p>
-
-                        <hr/>
                         {
                             infoStatus
-                            ? <div className="card-text">
-                                <p>WOWOW</p>
-                                <p>NICE</p>
-                                Here is a lot of new info
-                                <p>WOWOW</p>
-                                <p>NICE</p>
-                                Here is a lot of new info
-                                <p>WOWOW</p>
-                                <p>NICE</p>
-                            </div>
+                            ? <>
+                                <hr/>
+                                <div className="card-text">
+                                    <p>WOWOW</p>
+                                    <p>NICE</p>
+                                    Here is a lot of new info
+                                    <p>WOWOW</p>
+                                    <p>NICE</p>
+                                    Here is a lot of new info
+                                    <p>WOWOW</p>
+                                    <p>NICE</p>
+                                </div>
+                            </>
                             : null
                         }
-                        <p className="card-text">
+                        <hr/>
+                        <p className="card-text text-center text-uppercase">
                             <small
-                                className="text-muted cursor-pointer"
+                                className="text-muted cursor-pointer blue"
                                 onClick={() => toggleInfoStatus()}
                             >
-                                {infoStatus ? 'less info' :'more info...'}
+                                {infoStatus ? 'less info' :'more info'}
                             </small>
                         </p>
                     </div>

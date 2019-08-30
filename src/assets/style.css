@@ -65,6 +65,10 @@ ul li .btn-group {
     margin: 0;
 }
 
+.show > .dropdown-menu {
+    width: 500px;
+}
+
 .dropdown-menu .list-holder {
     max-height:250px;
 }
@@ -153,12 +157,23 @@ body.vertical-layout.vertical-menu.menu-collapsed .navbar-header {
     transform: scale(1.01);
 }
 
+.card-body {
+    padding-bottom: 0.5rem !important;
+}
+
+.card-body hr{
+    margin: 0.2rem;
+}
+
 .collectionIcon{
     top: 10px;
     right: 10px;
     color: white;
 }
 
+.collected-card-border {
+    box-shadow: inset 0px 10px 0px 0px #32cafe;
+}
 
 .image-cover-box {
     height: auto;
@@ -244,6 +259,9 @@ body.vertical-layout.vertical-menu.menu-collapsed .main-menu-content .nav-item .
 
 
 @media screen and (max-width: 992px){
+    .show > .dropdown-menu {
+        width: 70vw !important;
+    }
     .main.clearfix {
         max-width: 100%;
     }
